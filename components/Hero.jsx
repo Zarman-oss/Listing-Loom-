@@ -3,7 +3,7 @@ import HeroBtn from './heroBtn.jsx';
 export default function Hero() {
   return (
     <div className="bg-white text-black py-20 w-full flex flex-col sm:flex-row justify-center items-center">
-      <div className="flex flex-col m-8 items-center ">
+      <div className="container flex flex-col m-8 items-center ">
         <h1 className="text-5xl font-bold text-wrap text-red-700 text-center">
           Search Through Countless Properties And Rentals To Match Your Needs
         </h1>
@@ -12,7 +12,7 @@ export default function Hero() {
         </p>
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center m-16 ">
+      <div className=" container flex flex-col sm:flex-row items-center m-24 ">
         <input
           type="text"
           placeholder="Search City Zip Code"
@@ -24,7 +24,7 @@ export default function Hero() {
           <option value="condo">Condo</option>
           <option value="townhouse">Townhouse</option>
         </select>
-        <HeroBtn />
+        <HeroBtn text="Search" />
       </div>
     </div>
   );

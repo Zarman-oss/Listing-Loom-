@@ -1,7 +1,7 @@
 import '../assets/styles/globals.css';
 import Navbar from '../components/Navbar';
 export const metaData = {
-  title: 'ListingLoom ',
+  title: 'ListingLoom | Easy Real Estate Listing ',
   description: 'A robust and modern web application.',
 };
 export default function MainLayout({ children }) {
