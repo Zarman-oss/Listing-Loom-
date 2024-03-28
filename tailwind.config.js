@@ -6,12 +6,7 @@ const tailwindConfig = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      fontFamily: {
-        sans: ['Nunito Sana', 'sans-serif'],
-        serif: ['Merriweather', 'serif'],
-      },
-    },
+    extend: {},
   },
   plugins: [],
 };

@@ -1,10 +1,12 @@
-import MainLayout from './layout';
+import Hero from '../components/Hero';
+import Footer from '../components/Footer';
+import InfoBoxes from '../components/infoBoxes';
 export default function page() {
   return (
-    <MainLayout>
-      <div className='min-h-screen flex justify-center items-center'>
-        <h1 className='text-3xl font-bold '>Welcome to the Page</h1>
-      </div>
-    </MainLayout>
+    <>
+      <Hero />
+      <InfoBoxes />
+      <Footer />
+    </>
   );
 }
