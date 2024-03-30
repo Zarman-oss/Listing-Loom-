@@ -1,6 +1,5 @@
-import BlackButton from './blackButton';
+import { FaCalendar, FaHome, FaUserFriends } from 'react-icons/fa';
 import HeroBtn from './heroBtn';
-import { FaHome, FaUserFriends, FaCalendar } from 'react-icons/fa';
 
 export default function infoBox() {
   return (
@@ -13,7 +12,7 @@ export default function infoBox() {
             Discover your dream rental property. Save favorites and connect with
             landlords.
           </p>
-          <BlackButton text="Browse properties" />
+          <HeroBtn text="Browse Properties" />
         </div>
       </div>
       <div className="bg-gray-300 p-4 rounded-lg shadow-md flex items-center">
@@ -24,7 +23,7 @@ export default function infoBox() {
             List your properties and find potential tenants. Rent out as an
             Airbnb or for long term.
           </p>
-          <HeroBtn text="List properties " />
+          <HeroBtn text="List Properties " />
         </div>
       </div>
 
@@ -36,7 +35,7 @@ export default function infoBox() {
             Connect with realtors to find your dream property. Additional text
             here.
           </p>
-          <HeroBtn text="Book a call" />
+          <HeroBtn text="Book A Call" />
         </div>
       </div>
     </div>
