@@ -1,10 +1,14 @@
-import properties from '../../properties.json';
-import PropertyCard from '../../components/PropertyCard';
 import ErrorPage from '../../components/ErrorPage';
-export default function page() {
+import PropertyCard from '../../components/PropertyCard';
+import { fetchProperties } from '../../utils/requests';
+
+export default async function HomePage() {
+  const properties = await fetchProperties();
+
+  properties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   return (
     <section className="px-4 py-6">
-      {properties.length === 0 ? (
+      {properties && properties.length === 0 ? (
         <ErrorPage />
       ) : (
         <div className="container-xl lg:container m-auto px-4 py-6">

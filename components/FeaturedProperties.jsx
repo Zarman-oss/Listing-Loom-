@@ -1,7 +1,10 @@
-import properties from '@/properties.json';
 import ErrorPage from '../components/ErrorPage';
 import PropertyCard from '../components/PropertyCard';
-export default function FeaturedProperties() {
+import { fetchProperties } from '../utils/requests';
+
+export default async function FeaturedProperties() {
+  const properties = await fetchProperties();
+
   const recentListing = properties
     .sort(() => Math.random() - Math.random())
     .slice(0, 3);
