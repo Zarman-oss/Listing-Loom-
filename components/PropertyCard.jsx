@@ -43,11 +43,9 @@ export default function PropertyCard({ property }) {
         <div className="flex justify-center gap-4 text-gray-500 mb-2">
           <p>
             <FaBed className="inline mr-2" /> 3
-            <span className="md:hidden lg:inline ">{property.beds}</span>
           </p>{' '}
           <p>
             <FaBath className="inline mr-2" /> 2
-            <span className="md:hidden lg:inline">{property.baths}</span>
           </p>{' '}
           <p>
             <FaRulerCombined className="inline mr-2" />

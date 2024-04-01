@@ -1,4 +1,4 @@
-import InfoBox from './infoBox';
+import InfoBox from './UI/infoBox';
 
 export default function InfoBoxes() {
   return (

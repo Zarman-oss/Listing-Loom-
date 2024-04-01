@@ -10,8 +10,8 @@ import {
 import Link from 'next/link';
 import { Fragment, useState } from 'react';
 import { usePathname } from 'next/navigation';
-import LoginButton from './loginBtn';
-import PrimaryButton from './primaryBtn';
+import LoginButton from './UI/buttons/LoginBtn';
+import PrimaryButton from './UI/buttons/PrimaryBtn';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');

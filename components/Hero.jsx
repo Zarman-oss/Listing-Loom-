@@ -1,4 +1,4 @@
-import HeroBtn from './heroBtn.jsx';
+import HeroBtn from './UI/buttons/HeroBtn.jsx';
 
 export default function Hero() {
   return (

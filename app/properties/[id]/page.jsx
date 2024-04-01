@@ -1,9 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 
+import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import ErrorPage from '../../../components/UI/ErrorPage';
+import GoBackBtn from '../../../components/UI/buttons/GoBackBtn';
 import { fetchProperty } from '../../../utils/requests';
+import PropertyDetails from '../../../components/PropertyDetails';
+import PropertyImage from '../../../components/PropertyImage';
 
 export default function PropertyPage() {
   const { id } = useParams();
@@ -29,9 +34,22 @@ export default function PropertyPage() {
     }
   }, [id, property]);
 
+  if (!property && !loading) {
+    return <ErrorPage />;
+  }
   return (
-    <div>
-      <h1>From property id page</h1>
+    <div className="max-w-4xl mx-auto p-8">
+      <div className=" flex justify-start gap-x-6">
+        <Link href="/">
+          <GoBackBtn text="Go Back" />
+        </Link>
+      </div>
+      {!loading && property && (
+        <>
+          <PropertyImage image={property.images[0]} />
+        </>
+      )}
+      <PropertyDetails property={property} />
     </div>
   );
 }

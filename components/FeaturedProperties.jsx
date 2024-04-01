@@ -1,4 +1,4 @@
-import ErrorPage from '../components/ErrorPage';
+import ErrorPage from './UI/ErrorPage';
 import PropertyCard from '../components/PropertyCard';
 import { fetchProperties } from '../utils/requests';
 

@@ -1,5 +1,5 @@
 import { FaCalendar, FaHome, FaUserFriends } from 'react-icons/fa';
-import HeroBtn from './heroBtn';
+import HeroBtn from './buttons/HeroBtn';
 
 export default function infoBox() {
   return (
