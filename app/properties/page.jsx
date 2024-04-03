@@ -9,11 +9,13 @@ export default async function HomePage() {
 
   properties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
   return (
-    <section className="px-4 py-6">
-      <div className=" flex flex-col-1 gap-x-6">
-        <Link href="/">
-          <GoBackBtn text="Go Back" />
-        </Link>
+    <section className="px-4 py-4">
+      <div className="flex  max-w-7xl mx-auto p-1 ">
+        <div className="   ">
+          <Link href="/">
+            <GoBackBtn text="Go Back" />
+          </Link>
+        </div>
       </div>
       {properties && properties.length === 0 ? (
         <ErrorPage />

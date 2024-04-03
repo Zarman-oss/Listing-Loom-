@@ -13,11 +13,11 @@ export default function PropertyCard({ property }) {
     const { rates } = property;
 
     if (rates.monthly) {
-      return `${rates.monthly.toLocaleString()}/mo`;
+      return `${rates.monthly.toLocaleString()}/month`;
     } else if (rates.weekly) {
-      return `${rates.weekly.toLocaleString()}/wk`;
+      return `${rates.weekly.toLocaleString()}/week`;
     } else if (rates.nightly) {
-      return `${rates.nightly.toLocaleString()}/wk`;
+      return `${rates.nightly.toLocaleString()}/night`;
     }
   };
 
@@ -61,17 +61,17 @@ export default function PropertyCard({ property }) {
           <div className="flex justify-center gap-4 text-green-900 text-sm mb-4">
             {property.rates.nightly && (
               <p>
-                <FaMoneyBill className="inline mr-2" /> Nightly
+                <FaMoneyBill className="inline mr-2" /> Nigh
               </p>
             )}
             {property.rates.weekly && (
               <p>
-                <FaMoneyBill className="inline mr-2" /> Weekly
+                <FaMoneyBill className="inline mr-2" /> Week
               </p>
             )}
             {property.rates.monthly && (
               <p>
-                <FaMoneyBill className="inline mr-2" /> monthly{' '}
+                <FaMoneyBill className="inline mr-2" /> Month{' '}
               </p>
             )}
           </div>
@@ -86,12 +86,16 @@ export default function PropertyCard({ property }) {
               {property.location.city} {property.location.state}
             </span>
           </div>
-
           <Link
             href={`/properties/${property._id}`}
-            className="h-[36px] bg-black text-white  px-4 py-2 rounded-lg text-center text-sm hover:bg-gray-700"
+            className="h-[36px]  text-black px-4 py-2 rounded-lg text-center text-sm flex items-center hover:bg-gray-300"
           >
-            Details
+            <div className="font-bold flex items-center">
+              <button>
+                <span>Check Property</span>
+              </button>
+              <span className="mr-1">&#8594;</span>
+            </div>
           </Link>
         </div>
       </div>

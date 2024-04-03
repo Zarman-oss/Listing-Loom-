@@ -8,17 +8,30 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { Fragment, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { Fragment, useState, useEffect } from 'react';
 import LoginButton from './UI/buttons/LoginBtn';
 import PrimaryButton from './UI/buttons/PrimaryBtn';
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 export default function Navbar() {
+  const { data: session } = useSession();
+
   const pathname = usePathname();
-  const [isLoggedIn, setIsLoggedInMenu] = useState(false);
+
+  const [providers, setProviders] = useState(null);
+
+  useEffect(() => {
+    const setAuthProviders = async () => {
+      const res = await getProviders();
+      setProviders(res);
+    };
+
+    setAuthProviders();
+  }, []);
 
   return (
     <Disclosure
@@ -53,6 +66,7 @@ export default function Navbar() {
                     />
                   </Link>
                 </div>
+                {/* mobile hamburger menu */}
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex flex-col-1  m-8 ">
                     {pathname === '/properties' ? (
@@ -64,7 +78,7 @@ export default function Navbar() {
                         <PrimaryButton text="properties" />
                       </Link>
                     )}
-                    {isLoggedIn && (
+                    {session && (
                       <>
                         <Link href="/properties">
                           <PrimaryButton text="add property" />
@@ -74,14 +88,25 @@ export default function Navbar() {
                   </div>
                 </div>
               </div>
+
+              {/* Login Button  */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                {!isLoggedIn && (
-                  <Link className="" href="/login">
-                    <LoginButton />
-                  </Link>
+                {!session && (
+                  <div className="hidden sm:flex items-center space-x-4">
+                    {providers &&
+                      Object.values(providers).map((provider, index) => (
+                        <button
+                          key={index}
+                          onClick={() => signIn(provider.id)}
+                          type="button"
+                        >
+                          <LoginButton text="Login" />
+                        </button>
+                      ))}
+                  </div>
                 )}
 
-                {isLoggedIn && (
+                {session && (
                   <div className='className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"'>
                     <button
                       type="button"
@@ -178,10 +203,19 @@ export default function Navbar() {
                 <Link href="/properties">Add property</Link>
               </Disclosure.Button>
               <Disclosure.Button className="block rounded-md px-3 py-2 text-base font-medium text-gray-700  ">
-                {isLoggedIn ? null : (
-                  <Link href="/login">
-                    <LoginButton />
-                  </Link>
+                {session ? null : (
+                  <div>
+                    {providers &&
+                      Object.values(providers).map((provider, index) => (
+                        <button
+                          key={index}
+                          onClick={() => signIn(provider.id)}
+                          type="button"
+                        >
+                          <LoginButton text="Login" />
+                        </button>
+                      ))}
+                  </div>
                 )}
               </Disclosure.Button>
             </div>
