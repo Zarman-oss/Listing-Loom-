@@ -4,11 +4,11 @@
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import PropertyDetails from '../../../components/PropertyDetails';
+import PropertyImage from '../../../components/PropertyImage';
 import ErrorPage from '../../../components/UI/ErrorPage';
 import GoBackBtn from '../../../components/UI/buttons/GoBackBtn';
 import { fetchProperty } from '../../../utils/requests';
-import PropertyDetails from '../../../components/PropertyDetails';
-import PropertyImage from '../../../components/PropertyImage';
 
 export default function PropertyPage() {
   const { id } = useParams();
@@ -38,8 +38,8 @@ export default function PropertyPage() {
     return <ErrorPage />;
   }
   return (
-    <div className="max-w-4xl mx-auto p-8">
-      <div className=" flex justify-start gap-x-6">
+    <div className="max-w-4xl mx-auto p-8 ">
+      <div className=" flex justify-start gap-x-6 mb-4">
         <Link href="/">
           <GoBackBtn text="Go Back" />
         </Link>

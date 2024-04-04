@@ -3,16 +3,17 @@ import HeroBtn from './UI/buttons/HeroBtn.jsx';
 export default function Hero() {
   return (
     <div className="bg-white text-black py-20 w-full flex flex-col sm:flex-row justify-center items-center">
-      <div className="container flex flex-col m-8 items-center ">
-        <h1 className="text-5xl font-bold text-wrap text-red-700 text-center">
+      <div className="container flex flex-col m-8 items-center">
+        <h1 className="text-4xl lg:text-6xl font-bold text-red-700 text-center">
           Search Through Countless Properties And Rentals To Match Your Needs
         </h1>
-        <p className="mt-4 text-xl  text-gray-700 text-wrap">
+
+        <p className="mt-4 text-base lg:text-xl text-gray-700 text-center">
           Search, post rentals, and sell properties with ease
         </p>
       </div>
 
-      <div className=" container flex flex-col sm:flex-row items-center m-24 ">
+      <div className=" flex flex-col sm:flex-row items-center m-4 sm:m-24">
         <input
           type="text"
           placeholder="Search City Zip Code"

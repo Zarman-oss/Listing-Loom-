@@ -1,7 +1,4 @@
-export default function page() {
-  return (
-    <div>
-      <h1>add property</h1>
-    </div>
-  );
+import PropertyAddForm from '../../../components/PropertyAddForm';
+export default function AddProperty() {
+  return <PropertyAddForm />;
 }

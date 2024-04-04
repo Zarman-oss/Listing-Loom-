@@ -7,3 +7,7 @@
     font-family: 'Proxima Nova', system-ui, sans-serif;
   }
 }
+
+.hover\:underline-black:hover {
+  text-decoration: underline;
+}
