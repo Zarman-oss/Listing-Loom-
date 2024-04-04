@@ -1,6 +1,7 @@
-import mongoose, { Schema, model, models } from 'mongoose';
+import mongoose from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 
-const propertySchema = new Schema(
+const PropertySchema = new Schema(
   {
     Owner: {
       type: Schema.Types.ObjectId,
@@ -91,4 +92,4 @@ const propertySchema = new Schema(
 );
 
 export default mongoose.models.Property ||
-  mongoose.model('Property', propertySchema);
+  mongoose.model('Property', PropertySchema);

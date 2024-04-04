@@ -1,7 +1,7 @@
+import GoogleProvider from 'next-auth/providers/google';
 import connectDataBase from '../config/database';
 import User from '../models/User';
 
-import GoogleProvider from 'next-auth/providers/google';
 export const authOptions = {
   providers: [
     GoogleProvider({
@@ -18,16 +18,19 @@ export const authOptions = {
   ],
 
   callbacks: {
-    /**
-     * This function will be invoked when the user logs in successfully.
-     * It will connect to the database, check if the user exists, and add the user to the database if they don't.
-     * and return the object true to sign users in
-     */
     async signIn({ profile }) {
+      console.log('Sign-in callback invoked');
+
       await connectDataBase();
+
       const userExists = await User.findOne({ email: profile.email });
+
+      console.log('User exists:', userExists);
+
       if (!userExists) {
         const username = profile.name.slice(0, 20);
+
+        console.log('Creating new user:', profile.email);
 
         await User.create({
           email: profile.email,
@@ -38,10 +41,16 @@ export const authOptions = {
       return true;
     },
 
-    /**
-     * This function modifies the user session.
-     * It retrieves the user from the database, assigns the user ID to the session, and returns the session.
-     */
-    async session({ session }) {},
+    async session({ session }) {
+      console.log('Session callback invoked');
+
+      const user = await User.findOne({
+        email: session.user.email,
+      });
+
+      session.user.id = user._id.toString();
+
+      return session;
+    },
   },
 };

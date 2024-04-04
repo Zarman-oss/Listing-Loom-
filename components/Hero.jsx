@@ -13,7 +13,7 @@ export default function Hero() {
         </p>
       </div>
 
-      <div className="container flex flex-col sm:flex-row items-center m-4 sm:m-24">
+      <div className=" flex flex-col sm:flex-row items-center m-4 sm:m-24">
         <input
           type="text"
           placeholder="Search City Zip Code"

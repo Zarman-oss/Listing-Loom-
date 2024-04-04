@@ -1,13 +1,14 @@
+import mongoose from 'mongoose';
 import { Schema, model, models } from 'mongoose';
 
-const userSchema = new Schema(
+const UserSchema = new Schema(
   {
     email: {
       type: String,
       unique: [true, 'Email already exists'],
-      required: true,
+      required: [true, 'Email is required '],
     },
-    userName: {
+    username: {
       type: String,
       required: [true, 'Username is required'],
     },
@@ -26,4 +27,4 @@ const userSchema = new Schema(
   }
 );
 
-export default mongoose.models.User || mongoose.model('User', userSchema);
+export default mongoose.models.User || mongoose.model('User', UserSchema);
