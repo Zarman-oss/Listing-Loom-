@@ -1,8 +1,95 @@
+'use client';
+
+import { useState } from 'react';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
 
 export default function PropertyAddForm() {
+  const [fields, setFields] = useState({
+    type: 'Apartment',
+    name: 'Test Property',
+    description: '',
+    location: {
+      street: '',
+      city: 'Test city',
+      state: 'Test State ',
+      zipcode: '',
+    },
+    beds: '3',
+    baths: '2',
+    square_feet: '1600',
+    amenities: [],
+    rates: {
+      week: '',
+      month: '2100',
+      nigh: '',
+    },
+    seller_info: {
+      name: '',
+      email: 'test@test.com ',
+      phone: '',
+    },
+    images: [],
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    if (name.includes('.')) {
+      const [outerKey, innerKey] = name.split('.');
+      setFields((prevFields) => ({
+        ...prevFields,
+        [outerKey]: {
+          ...prevFields[outerKey],
+          [innerKey]: value,
+        },
+      }));
+    } else {
+      setFields((prevFields) => ({
+        ...prevFields,
+        [name]: value,
+      }));
+    }
+  };
+  const handleAmenitiesChange = (e) => {
+    const { value, checked } = e.target;
+    const updatedAmenities = [...fields.amenities];
+    if (checked) {
+      updatedAmenities.push(value);
+    } else {
+      const index = updatedAmenities.indexOf(value);
+
+      if (index !== -1) {
+        updatedAmenities.splice(index, 1);
+      }
+    }
+
+    setFields((prevFields) => ({
+      ...prevFields,
+      amenities: updatedAmenities,
+    }));
+  };
+
+  const handleImageChange = (e) => {
+    const { files } = e.target;
+
+    const updatedImages = [...fields.images];
+
+    for (const file of files) {
+      updatedImages.push(file);
+    }
+
+    setFields((prevFields) => ({
+      ...prevFields,
+      images: updatedImages,
+    }));
+  };
+
   return (
-    <form className="max-w-lg mx-auto">
+    <form
+      className="max-w-lg mx-auto"
+      action="/api/properties"
+      method="POST"
+      encType="multipart/form-data"
+    >
       <div className="space-y-12 m-8 ">
         <div className="border-b border-gray-900/10 pb-12">
           <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -19,8 +106,10 @@ export default function PropertyAddForm() {
               </label>
               <div className="mt-2">
                 <select
-                  id="country"
-                  name="country"
+                  value={fields.type}
+                  onChange={handleChange}
+                  id="type"
+                  name="type"
                   autoComplete="country-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                 >
@@ -45,9 +134,11 @@ export default function PropertyAddForm() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
+                    value={fields.name}
+                    onChange={handleChange}
                     type="text"
-                    name="username"
-                    id="username"
+                    name="name"
+                    id="name"
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                     placeholder="Affordable 1100 property"
@@ -68,8 +159,10 @@ export default function PropertyAddForm() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
+                    value={fields.location.street}
+                    onChange={handleChange}
                     type="text"
-                    name="username"
+                    name="location.street"
                     id="username"
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -80,8 +173,10 @@ export default function PropertyAddForm() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
+                    value={fields.location.city}
+                    onChange={handleChange}
                     type="text"
-                    name="username"
+                    name="location.city"
                     id="username"
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -92,8 +187,10 @@ export default function PropertyAddForm() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
+                    value={fields.location.state}
+                    onChange={handleChange}
                     type="text"
-                    name="username"
+                    name="location.state"
                     id="username"
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -104,8 +201,10 @@ export default function PropertyAddForm() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
+                    value={fields.location.zipcode}
+                    onChange={handleChange}
                     type="text"
-                    name="username"
+                    name="location.zipcode"
                     id="username"
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -127,8 +226,10 @@ export default function PropertyAddForm() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
+                    value={fields.beds}
+                    onChange={handleChange}
                     type="number"
-                    name="username"
+                    name="beds"
                     id="username"
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -149,8 +250,10 @@ export default function PropertyAddForm() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
+                    value={fields.baths}
+                    onChange={handleChange}
                     type="number"
-                    name="username"
+                    name="baths"
                     id="username"
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -171,8 +274,10 @@ export default function PropertyAddForm() {
               <div className="mt-2">
                 <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                   <input
+                    value={fields.square_feet}
+                    onChange={handleChange}
                     type="number"
-                    name="username"
+                    name="square_feet"
                     id="username"
                     autoComplete="username"
                     className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -191,11 +296,12 @@ export default function PropertyAddForm() {
               </label>
               <div className="mt-2">
                 <textarea
-                  id="about"
-                  name="about"
+                  value={fields.description}
+                  onChange={handleChange}
+                  id="description"
+                  name="description"
                   rows={3}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  defaultValue={'Describe your property'}
                 />
               </div>
             </div>
@@ -208,216 +314,263 @@ export default function PropertyAddForm() {
                 <div className="flex flex-wrap  gap-2">
                   <div className="mt-6 ">
                     <div className=" flex items-center space-x-4 ">
-                      <input
-                        id="comments"
-                        name="comments"
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                      />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Wifi
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Wifi"
+                        checked={fields.amenities.includes('Wifi')}
                         id="comments"
-                        name="comments"
+                        name="Wifi"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Open Kitchen
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Open Kitchen "
+                        checked={fields.amenities.includes('Open Kitchen')}
                         id="comments"
-                        name="comments"
+                        name="Open Kitchen"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Washer and Dryer
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Washer and Dryer"
+                        checked={fields.amenities.includes('Washer and Dryer')}
                         id="comments"
-                        name="comments"
+                        name="Washer and Dryer"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Free Parking
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Free Parking"
+                        checked={fields.amenities.includes('Free Parking')}
                         id="comments"
-                        name="comments"
+                        name="Free Parking"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Pool
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Pool"
+                        checked={fields.amenities.includes('Pool')}
                         id="comments"
-                        name="comments"
+                        name="Pool"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Tub
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Tub"
+                        checked={fields.amenities.includes('Tub')}
                         id="comments"
-                        name="comments"
+                        name="Tub"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Security
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Security"
+                        checked={fields.amenities.includes('Security')}
                         id="comments"
-                        name="comments"
+                        name="Security "
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Handy Cap facility
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Handy Cap facility"
+                        checked={fields.amenities.includes(
+                          'Handy Cap facility'
+                        )}
                         id="comments"
-                        name="comments"
+                        name="Handy Cap facility"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Elevator
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Elevator"
+                        checked={fields.amenities.includes('Elevator')}
                         id="comments"
-                        name="comments"
+                        name="Elevator"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Dishwasher
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Dishwasher"
+                        checked={fields.amenities.includes('Dishwasher')}
                         id="comments"
-                        name="comments"
+                        name="Dishwasher"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Gym
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Gym"
+                        checked={fields.amenities.includes('Gym')}
                         id="comments"
-                        name="comments"
+                        name="Gym"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           AC
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="AC"
+                        checked={fields.amenities.includes('AC')}
                         id="comments"
-                        name="comments"
+                        name="AC"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Patio
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Patio"
+                        checked={fields.amenities.includes('Patio')}
                         id="comments"
-                        name="comments"
+                        name="Patio"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Tv
                         </label>
                       </div>
                       <input
+                        onChange={handleAmenitiesChange}
+                        value="Tv"
+                        checked={fields.amenities.includes('Tv')}
                         id="comments"
-                        name="comments"
+                        name="Tv"
                         type="checkbox"
                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       />
                       <div className="flex flex-col">
                         <label
-                          for="comments"
+                          htmlFor="comments"
                           className="font-medium text-gray-900"
                         >
                           Coffee Maker
                         </label>
                       </div>
+                      <input
+                        onChange={handleAmenitiesChange}
+                        value="Coffee Maker"
+                        checked={fields.amenities.includes('Coffee Maker')}
+                        id="comments"
+                        name="Tv"
+                        type="checkbox"
+                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                      />
                     </div>
                   </div>
                 </div>
@@ -437,8 +590,10 @@ export default function PropertyAddForm() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
+                      value={fields.rates.week}
+                      onChange={handleChange}
                       type="number"
-                      name="username"
+                      name="rates.week"
                       id="username"
                       autoComplete="username"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -459,8 +614,10 @@ export default function PropertyAddForm() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
+                      value={fields.rates.month}
+                      onChange={handleChange}
                       type="number"
-                      name="username"
+                      name="rates.month"
                       id="username"
                       autoComplete="username"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -481,8 +638,10 @@ export default function PropertyAddForm() {
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
+                      value={fields.rates.year}
+                      onChange={handleChange}
                       type="number"
-                      name="username"
+                      name="rates.year"
                       id="username"
                       autoComplete="username"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -505,32 +664,16 @@ export default function PropertyAddForm() {
                       htmlFor="first-name"
                       className="block text-sm font-medium leading-6 text-gray-900"
                     >
-                      First name
+                      Name
                     </label>
                     <div className="mt-2">
                       <input
+                        value={fields.seller_info.name}
+                        onChange={handleChange}
                         type="text"
-                        name="first-name"
+                        name="seller_info.name"
                         id="first-name"
                         autoComplete="given-name"
-                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="sm:col-span-3">
-                    <label
-                      htmlFor="last-name"
-                      className="block text-sm font-medium leading-6 text-gray-900"
-                    >
-                      Last name
-                    </label>
-                    <div className="mt-2">
-                      <input
-                        type="text"
-                        name="last-name"
-                        id="last-name"
-                        autoComplete="family-name"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -545,10 +688,32 @@ export default function PropertyAddForm() {
                     </label>
                     <div className="mt-2">
                       <input
+                        value={fields.seller_info.email}
+                        onChange={handleChange}
                         id="email"
-                        name="email"
+                        name="seller_info.email"
                         type="email"
                         autoComplete="email"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-3">
+                    <label
+                      htmlFor="first-name"
+                      className="block text-sm font-medium leading-6 text-gray-900"
+                    >
+                      Phone
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        value={fields.seller_info.phone}
+                        onChange={handleChange}
+                        type="text"
+                        name="seller_info.phone"
+                        id="first-name"
+                        autoComplete="given-name"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       />
                     </div>
@@ -583,8 +748,9 @@ export default function PropertyAddForm() {
                 htmlFor="cover-photo"
                 className="block text-sm font-medium leading-6 text-gray-900"
               >
-                Cover photo
+                Select Pictures
               </label>
+
               <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div className="text-center">
                   <PhotoIcon
@@ -593,22 +759,26 @@ export default function PropertyAddForm() {
                   />
                   <div className="mt-4 flex text-sm leading-6 text-gray-600">
                     <label
-                      htmlFor="file-upload"
+                      htmlFor="images"
                       className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
-                      <span>Upload a file</span>
-                      <input
-                        id="file-upload"
-                        name="file-upload"
-                        type="file"
-                        className="sr-only"
-                      />
+                      Upload photos
                     </label>
+                    <input
+                      className="sr-only"
+                      type="file"
+                      id="images"
+                      name="images"
+                      accept="image/*"
+                      multiple
+                      required
+                      onChange={handleImageChange}
+                    />
                     <p className="pl-1">or drag and drop</p>
                   </div>
-                  <p className="text-xs leading-5 text-gray-600">
+                  {/* <p className="text-xs leading-5 text-gray-600">
                     PNG, JPG, GIF up to 10MB
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>

@@ -36,8 +36,6 @@ export default function Navbar() {
     setAuthProviders();
   }, []);
 
-  console.log(profileImage);
-
   return (
     <Disclosure
       as="nav"
