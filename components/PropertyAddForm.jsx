@@ -14,14 +14,14 @@ export default function PropertyAddForm() {
       state: 'Test State ',
       zipcode: '',
     },
+    amenities: [],
     beds: '3',
     baths: '2',
     square_feet: '1600',
-    amenities: [],
     rates: {
       week: '',
       month: '2100',
-      nigh: '',
+      night: '',
     },
     seller_info: {
       name: '',
@@ -330,7 +330,7 @@ export default function PropertyAddForm() {
                         value='Wifi'
                         checked={fields.amenities.includes('Wifi')}
                         id='comments'
-                        name='Wifi'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -344,10 +344,10 @@ export default function PropertyAddForm() {
                       </div>
                       <input
                         onChange={handleAmenitiesChange}
-                        value='Open Kitchen '
+                        value='Open Kitchen'
                         checked={fields.amenities.includes('Open Kitchen')}
                         id='comments'
-                        name='Open Kitchen'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -364,7 +364,7 @@ export default function PropertyAddForm() {
                         value='Washer and Dryer'
                         checked={fields.amenities.includes('Washer and Dryer')}
                         id='comments'
-                        name='Washer and Dryer'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -381,7 +381,7 @@ export default function PropertyAddForm() {
                         value='Free Parking'
                         checked={fields.amenities.includes('Free Parking')}
                         id='comments'
-                        name='Free Parking'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -398,7 +398,7 @@ export default function PropertyAddForm() {
                         value='Pool'
                         checked={fields.amenities.includes('Pool')}
                         id='comments'
-                        name='Pool'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -415,7 +415,7 @@ export default function PropertyAddForm() {
                         value='Tub'
                         checked={fields.amenities.includes('Tub')}
                         id='comments'
-                        name='Tub'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -432,7 +432,7 @@ export default function PropertyAddForm() {
                         value='Security'
                         checked={fields.amenities.includes('Security')}
                         id='comments'
-                        name='Security '
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -451,7 +451,7 @@ export default function PropertyAddForm() {
                           'Handy Cap facility'
                         )}
                         id='comments'
-                        name='Handy Cap facility'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -468,7 +468,7 @@ export default function PropertyAddForm() {
                         value='Elevator'
                         checked={fields.amenities.includes('Elevator')}
                         id='comments'
-                        name='Elevator'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -485,7 +485,7 @@ export default function PropertyAddForm() {
                         value='Dishwasher'
                         checked={fields.amenities.includes('Dishwasher')}
                         id='comments'
-                        name='Dishwasher'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -502,7 +502,7 @@ export default function PropertyAddForm() {
                         value='Gym'
                         checked={fields.amenities.includes('Gym')}
                         id='comments'
-                        name='Gym'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -519,7 +519,7 @@ export default function PropertyAddForm() {
                         value='AC'
                         checked={fields.amenities.includes('AC')}
                         id='comments'
-                        name='AC'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -536,7 +536,7 @@ export default function PropertyAddForm() {
                         value='Patio'
                         checked={fields.amenities.includes('Patio')}
                         id='comments'
-                        name='Patio'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -553,7 +553,7 @@ export default function PropertyAddForm() {
                         value='Tv'
                         checked={fields.amenities.includes('Tv')}
                         id='comments'
-                        name='Tv'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -570,7 +570,7 @@ export default function PropertyAddForm() {
                         value='Coffee Maker'
                         checked={fields.amenities.includes('Coffee Maker')}
                         id='comments'
-                        name='Tv'
+                        name='amenities'
                         type='checkbox'
                         className='h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600'
                       />
@@ -635,16 +635,16 @@ export default function PropertyAddForm() {
                     htmlFor='username'
                     className='block text-sm font-medium leading-6 text-gray-900'
                   >
-                    Year
+                    night
                   </label>
                 </div>
                 <div className='mt-2'>
                   <div className='flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md'>
                     <input
-                      value={fields.rates.year}
+                      value={fields.rates.night}
                       onChange={handleChange}
                       type='number'
-                      name='rates.year'
+                      name='rates.night'
                       id='username'
                       autoComplete='username'
                       className='block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6'
