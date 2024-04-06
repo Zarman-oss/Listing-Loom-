@@ -1,7 +1,7 @@
 'use client';
 
-import { useState } from 'react';
 import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { useState } from 'react';
 
 export default function PropertyAddForm() {
   const [fields, setFields] = useState({
@@ -49,9 +49,12 @@ export default function PropertyAddForm() {
       }));
     }
   };
+
   const handleAmenitiesChange = (e) => {
     const { value, checked } = e.target;
+
     const updatedAmenities = [...fields.amenities];
+
     if (checked) {
       updatedAmenities.push(value);
     } else {
