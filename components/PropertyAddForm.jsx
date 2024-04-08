@@ -5,27 +5,27 @@ import { useState } from 'react';
 
 export default function PropertyAddForm() {
   const [fields, setFields] = useState({
-    type: 'Apartment',
-    name: 'Test Property',
+    type: '',
+    name: '',
     description: '',
     location: {
       street: '',
-      city: 'Test city',
-      state: 'Test State ',
+      city: '',
+      state: '',
       zipcode: '',
     },
     amenities: [],
-    beds: '3',
-    baths: '2',
-    square_feet: '1600',
+    beds: '',
+    baths: '',
+    square_feet: '',
     rates: {
       week: '',
-      month: '2100',
+      month: '',
       night: '',
     },
     seller_info: {
       name: '',
-      email: 'test@test.com ',
+      email: '',
       phone: '',
     },
     images: [],
