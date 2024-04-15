@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../utils/authOptions';
+import { authOptions } from '@/utils/authOptions.js';
 
 export const getSessionUser = async () => {
   try {

@@ -1,9 +1,6 @@
-import cloudinary from '../../../config/cloudinary';
-import connectDataBase from '../../../config/database';
-import Property from '../../../models/Property';
-import { getSessionUser } from '../../../utils/getSessionUser';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from '../../../utils/authOptions';
+import connectDataBase from '@/config/database';
+import Property from '@/models/Property';
+import { getSessionUser } from '@/utils/getSessionUser';
 
 /**
  * GET api/properties
@@ -39,9 +36,10 @@ export const POST = async (request) => {
     const sessionUser = await getSessionUser();
 
     if (!sessionUser || !sessionUser.userId) {
-      return new Response('User ID is required', { status: 401 });
+      return new Response('User ID is required', {
+        status: 401,
+      });
     }
-
     const { userId } = sessionUser;
 
     const formData = await request.formData();
@@ -50,9 +48,9 @@ export const POST = async (request) => {
 
     const amenities = formData.getAll('amenities');
 
-    const images = formData
-      .getAll('images')
-      .filter((image) => image.name !== '');
+    // const images = formData
+    //   .getAll('images')
+    //   .filter((image) => image.name !== '');
 
     // ?  now we have to be able to store this in db right, for that we have to make an object
 
@@ -114,17 +112,17 @@ export const POST = async (request) => {
     // }
 
     const newProperty = new Property(propertyData);
+
     await newProperty.save();
-
-    // console.log(newProperty);
-
-    // return new Response(JSON.stringify({ message: 'all good' }), {
-    //   status: 200,
-    // });
 
     return Response.redirect(
       `${process.env.NEXTAUTH_URL}/properties/${newProperty._id}`
     );
+    // console.log(propertyData);
+
+    // return new Response(JSON.stringify({ message: 'all good' }), {
+    //   status: 200,
+    // });
   } catch (error) {
     return new Response('Failed to add property', {
       status: 500,
