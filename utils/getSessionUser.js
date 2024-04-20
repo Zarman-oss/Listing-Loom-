@@ -13,7 +13,6 @@ export const getSessionUser = async () => {
     }
 
     console.log('Session user found:', session.user);
-
     return {
       user: session.user,
       userId: session.user.id,

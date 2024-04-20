@@ -14,13 +14,16 @@ export default function PropertyDetails({ property }) {
 
     if (rates.monthly) {
       return `${rates.monthly.toLocaleString()}/month`;
+    } else if (rates.weekly && rates.nightly) {
+      return `${rates.weekly.toLocaleString()}/week, ${rates.nightly.toLocaleString()}/night`;
     } else if (rates.weekly) {
       return `${rates.weekly.toLocaleString()}/week`;
     } else if (rates.nightly) {
-      return `${rates.nightly.toLocaleString()}/nigh`;
+      return `${rates.nightly.toLocaleString()}/night`;
+    } else {
+      return 'No rate available';
     }
   };
-
   if (!property) {
     return null;
   }
@@ -78,14 +81,6 @@ export default function PropertyDetails({ property }) {
 
           <div className="text-xl text-gray-800 font-semibold mb-4">
             {getPropertyRate()}
-            {property.rates.nightly ? (
-              `$${property.rates.nightly.toLocaleString()}`
-            ) : (
-              <div className="flex items-center">
-                <FaTimesCircle className="text-red-700 mr-1" />
-                <h3 className="text-sm">No Nightly Payment Available </h3>
-              </div>
-            )}
           </div>
         </div>
 

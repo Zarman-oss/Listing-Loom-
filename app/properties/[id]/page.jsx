@@ -8,7 +8,7 @@ import PropertyDetails from '../../../components/PropertyDetails';
 import PropertyImage from '../../../components/PropertyImage';
 import ErrorPage from '../../../components/UI/ErrorPage';
 import GoBackBtn from '../../../components/UI/buttons/GoBackBtn';
-import { fetchProperty } from '../../../utils/requests';
+import { fetchProperty } from '@/utils/requests.js';
 
 export default function PropertyPage() {
   const { id } = useParams();

@@ -45,6 +45,7 @@ export const POST = async (request) => {
     }
 
     const { userId } = sessionUser;
+
     console.log('User ID:', userId);
 
     const formData = await request.formData();
@@ -64,9 +65,9 @@ export const POST = async (request) => {
       square_feet: formData.get('square_feet'),
       amenities: formData.getAll('amenities'),
       rates: {
-        week: formData.get('rates.week'),
-        month: formData.get('rates.month'),
-        night: formData.get('rates.night'),
+        weekly: formData.get('rates.weekly'),
+        monthly: formData.get('rates.monthly'),
+        nightly: formData.get('rates.nightly'),
       },
       seller_info: {
         name: formData.get('seller_info.name'),

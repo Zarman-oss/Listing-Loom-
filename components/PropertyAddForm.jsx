@@ -1,6 +1,6 @@
 'use client';
 
-import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid';
+import { PhotoIcon } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 
 export default function PropertyAddForm() {
@@ -19,9 +19,9 @@ export default function PropertyAddForm() {
     square_feet: '',
     amenities: [],
     rates: {
-      week: 0,
-      month: 0,
-      night: 0,
+      weekly: '',
+      monthly: '',
+      nightly: '',
     },
     seller_info: {
       name: '',
@@ -579,19 +579,19 @@ export default function PropertyAddForm() {
               <div className="sm:col-span-4 ">
                 <div className="">
                   <label
-                    htmlFor="week_rate"
+                    htmlFor="weekly_rate"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Week
+                    Weekly
                   </label>
                 </div>
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
                       type="number"
-                      id="week_rate"
-                      name="rates.week"
-                      value={fields.rates.week}
+                      id="weekly_rate"
+                      name="rates.weekly"
+                      value={fields.rates.weekly}
                       onChange={handleChange}
                       autoComplete="username"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -603,19 +603,19 @@ export default function PropertyAddForm() {
               <div className="sm:col-span-4 ">
                 <div className="">
                   <label
-                    htmlFor="month_rate"
+                    htmlFor="monthly_rate"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    Month
+                    Monthly
                   </label>
                 </div>
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
                       type="number"
-                      id="month_rate"
-                      name="rates.month"
-                      value={fields.rates.month}
+                      id="monthly_rate"
+                      name="rates.monthly"
+                      value={fields.rates.monthly}
                       onChange={handleChange}
                       autoComplete="username"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
@@ -627,19 +627,19 @@ export default function PropertyAddForm() {
               <div className="sm:col-span-4 ">
                 <div className="">
                   <label
-                    htmlFor="night_rate"
+                    htmlFor="nightly_rate"
                     className="block text-sm font-medium leading-6 text-gray-900"
                   >
-                    night
+                    Nightly
                   </label>
                 </div>
                 <div className="mt-2">
                   <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                     <input
                       type="number"
-                      id="nigh_rate"
-                      name="rates.night"
-                      value={fields.rates.night}
+                      id="nighly_rate"
+                      name="rates.nightly"
+                      value={fields.rates.nightly}
                       onChange={handleChange}
                       autoComplete="username"
                       className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
