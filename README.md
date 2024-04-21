@@ -12,7 +12,7 @@ Listing Loom is a real estate website project where users can post properties fo
 
 ## Getting Involved
 
-We welcome contributions and feedback from the community as we shape the future of Listing Loom. If you have any ideas for features, UI enhancements, or improvements, we'd love to hear from you!
+Clone this repo and add ya'll own spin to this project because I can't make no UI  lol 😂.  
 
 ## Get Started
 

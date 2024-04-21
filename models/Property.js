@@ -3,7 +3,7 @@ import { Schema, model, models } from 'mongoose';
 
 const PropertySchema = new Schema(
   {
-    Owner: {
+    owner: {
       type: Schema.Types.ObjectId,
       ref: 'User',
       required: true,
@@ -33,7 +33,6 @@ const PropertySchema = new Schema(
         type: String,
       },
     },
-
     beds: {
       type: Number,
       required: true,
@@ -51,7 +50,6 @@ const PropertySchema = new Schema(
         type: String,
       },
     ],
-
     rates: {
       nightly: {
         type: Number,
@@ -63,7 +61,6 @@ const PropertySchema = new Schema(
         type: Number,
       },
     },
-
     seller_info: {
       name: {
         type: String,
@@ -75,7 +72,6 @@ const PropertySchema = new Schema(
         type: String,
       },
     },
-
     images: [
       {
         type: String,

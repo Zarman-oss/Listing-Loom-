@@ -21,6 +21,10 @@ export default function PropertyCard({ property }) {
     }
   };
 
+  if (!property) {
+    return null;
+  }
+
   return (
     <div className="rounded-xl shadow-md relative lg:max-w-sm">
       <Image

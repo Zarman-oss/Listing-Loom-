@@ -36,8 +36,6 @@ export default function Navbar() {
     setAuthProviders();
   }, []);
 
-  console.log(profileImage);
-
   return (
     <Disclosure
       as="nav"
@@ -178,15 +176,15 @@ export default function Navbar() {
                           </Menu.Item>
                           <Menu.Item>
                             {({ active }) => (
-                              <a
-                                href="#"
+                              <Link
+                                href="/profile"
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
                                   'block px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
-                                User Settings
-                              </a>
+                                User Profile
+                              </Link>
                             )}
                           </Menu.Item>
                           <Menu.Item>
@@ -224,7 +222,7 @@ export default function Navbar() {
                 <Link href="/properties">Properties</Link>
               </Disclosure.Button>
               <Disclosure.Button className="block rounded-md px-3 py-2 text-base font-medium text-gray-700  hover:bg-gray-300">
-                <Link href="/properties">Add property</Link>
+                <Link href="/properties/add">Add property</Link>
               </Disclosure.Button>
               <Disclosure.Button className="block rounded-md px-3 py-2 text-base font-medium text-gray-700  ">
                 {session ? null : (
