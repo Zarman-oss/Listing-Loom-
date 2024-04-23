@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client';
-
+import { fetchProperty } from '@/utils/requests.js';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import PropertyDetails from '../../../components/PropertyDetails';
+import PropertyImages from '@/components/PropertyImages.jsx';
 import PropertyImage from '../../../components/PropertyImage';
 import ErrorPage from '../../../components/UI/ErrorPage';
 import GoBackBtn from '../../../components/UI/buttons/GoBackBtn';
-import { fetchProperty } from '@/utils/requests.js';
 
 export default function PropertyPage() {
   const { id } = useParams();

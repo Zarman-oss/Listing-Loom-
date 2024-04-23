@@ -13,13 +13,13 @@ export default function PropertyDetails({ property }) {
     const { rates } = property;
 
     if (rates.monthly) {
-      return `${rates.monthly.toLocaleString()}/month`;
+      return `$${rates.monthly.toLocaleString()}/month`;
     } else if (rates.weekly && rates.nightly) {
-      return `${rates.weekly.toLocaleString()}/week, ${rates.nightly.toLocaleString()}/night`;
+      return `$${rates.weekly.toLocaleString()}/week,$${rates.nightly.toLocaleString()}/night`;
     } else if (rates.weekly) {
-      return `${rates.weekly.toLocaleString()}/week`;
+      return `$${rates.weekly.toLocaleString()}/week`;
     } else if (rates.nightly) {
-      return `${rates.nightly.toLocaleString()}/night`;
+      return `$${rates.nightly.toLocaleString()}/night`;
     } else {
       return 'No rate available';
     }
