@@ -1,7 +1,7 @@
+import Footer from '@/components/Footer.jsx';
 import '../assets/styles/globals.css';
 import AuthProvider from '../components/AuthProvider';
 import Navbar from '../components/Navbar';
-import Footer from '@/components/Footer.jsx';
 export const metaData = {
   title: 'ListingLoom | Easy Real Estate Listing ',
   description: 'A robust and modern web application.',
@@ -18,8 +18,7 @@ export default function MainLayout({ children }) {
             <Navbar />
             <div className="min-h-screen ">
               <main>{children}</main>
-            </div>{' '}
-            v
+            </div>
             <Footer />
           </div>
         </body>
