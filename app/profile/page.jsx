@@ -1,17 +1,24 @@
 'use client';
-import { FaMapMarker } from 'react-icons/fa';
+import profileDefault from '@/assets/styles/images/profile.png';
 import Loader from '@/components/Loading.jsx';
 import HeroBtn from '@/components/UI/buttons/HeroBtn.jsx';
-import Image from 'next/image.js';
-import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import profileDefault from '@/assets/styles/images/profile.png';
+import Image from 'next/image.js';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { FaMapMarker } from 'react-icons/fa';
+import Modal from '@/components/UI/Modal.jsx';
+import Alert from '@/components/UI/Alert.jsx';
 
 export default function ProfilePage() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const { data: session } = useSession();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedPropertyId, setSelectedPropertyId] = useState(null);
+
+  const [alert, setAlert] = useState({ show: false, type: '', message: '' });
 
   const profileImage = session?.user?.image;
   const profileName = session?.user?.name;
@@ -19,18 +26,21 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const fetchUserProperties = async (userId) => {
+      console.log('Fetching properties for user:', userId);
       if (!userId) {
         return;
       }
 
       try {
         const res = await fetch(`/api/properties/user/${userId}`);
+
+        console.log('Response:', res);
         if (res.status === 200) {
           const data = await res.json();
           setProperties(data);
         }
       } catch (error) {
-        console.log(error);
+        console.log('Fetch error:', error);
       } finally {
         setLoading(false);
       }
@@ -41,8 +51,68 @@ export default function ProfilePage() {
     }
   }, [session]);
 
+  const handleDeleteProperty = (propertyId) => {
+    setSelectedPropertyId(propertyId);
+    setIsModalOpen(true);
+  };
+
+  const handleConfirmDelete = async (propertyId) => {
+    try {
+      const res = await fetch(`/api/properties/${propertyId}`, {
+        method: 'DELETE',
+      });
+
+      if (res.status === 200) {
+        const updatedProperties = properties.filter(
+          (property) => property._id !== propertyId
+        );
+        setProperties(updatedProperties);
+        setAlert({
+          show: true,
+          type: 'success',
+          message: 'Property deleted successfully',
+        });
+
+        // Hide the alert after 5 seconds
+        // setTimeout(() => {
+        //   setAlert({ show: false, type: '', message: '' });
+        // }, 5000);
+      } else {
+        setAlert({
+          show: true,
+          type: 'error',
+          message: 'Failed to delete property',
+        });
+
+        // Hide the alert after 5 seconds
+        // setTimeout(() => {
+        //   setAlert({ show: false, type: '', message: '' });
+        // }, 5000);
+      }
+    } catch (error) {
+      console.log(error);
+      setAlert({
+        show: true,
+        type: 'error',
+        message: 'Failed to delete property',
+      });
+
+      // Hide the alert after 5 seconds
+      // setTimeout(() => {
+      //   setAlert({ show: false, type: '', message: '' });
+      // }, 5000);
+    }
+
+    setIsModalOpen(false);
+  };
   return (
     <section className="py-12">
+      <Alert
+        show={alert.show} // Pass show state from alert
+        type={alert.type} // Pass type state from alert
+        message={alert.message} // Pass message state from alert
+        onClose={() => setAlert({ show: false, type: '', message: '' })} // Close handler
+      />
       <div className="container mx-auto">
         <div className="rounded-lg p-8">
           <h1 className="text-3xl font-bold mb-6 text-center">Your Profile</h1>
@@ -98,12 +168,16 @@ export default function ProfilePage() {
                         </p>
                       </div>
                       <div className="mt-4">
-                        <Link href="/add-property.html">
+                        <Link href="">
                           <button className=" text-black px-4 py-2 font-semibold mr-4 ">
                             Edit
                           </button>
                         </Link>
-                        <HeroBtn text="Delete" />
+                        <button
+                          onClick={() => handleDeleteProperty(property._id)}
+                        >
+                          <HeroBtn text="Delete" />
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -113,6 +187,11 @@ export default function ProfilePage() {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={() => handleConfirmDelete(selectedPropertyId)}
+      />
     </section>
   );
 }

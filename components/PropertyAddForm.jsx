@@ -576,7 +576,7 @@ export default function PropertyAddForm() {
               <legend className="text-sm font-semibold leading-6 text-gray-900">
                 Put amount
               </legend>
-              <div className="sm:col-span-4 ">
+              <div className="sm:col-span-4">
                 <div className="">
                   <label
                     htmlFor="weekly_rate"
@@ -726,7 +726,7 @@ export default function PropertyAddForm() {
                   <div className="mt-4 flex text-sm leading-6 text-gray-600">
                     <label
                       htmlFor="images"
-                      className="relative cursor-pointer text-red-700 hover:bg-red-900"
+                      className="relative cursor-pointer text-red-700 "
                     >
                       Upload photos
                     </label>
