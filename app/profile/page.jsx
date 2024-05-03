@@ -1,14 +1,14 @@
 'use client';
 import profileDefault from '@/assets/styles/images/profile.png';
 import Loader from '@/components/Loading.jsx';
+import Alert from '@/components/UI/Alert.jsx';
+import Modal from '@/components/UI/Modal.jsx';
 import HeroBtn from '@/components/UI/buttons/HeroBtn.jsx';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image.js';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { FaMapMarker } from 'react-icons/fa';
-import Modal from '@/components/UI/Modal.jsx';
-import Alert from '@/components/UI/Alert.jsx';
 
 export default function ProfilePage() {
   const [properties, setProperties] = useState([]);
@@ -168,10 +168,11 @@ export default function ProfilePage() {
                         </p>
                       </div>
                       <div className="mt-4">
-                        <Link href="">
-                          <button className=" text-black px-4 py-2 font-semibold mr-4 ">
-                            Edit
-                          </button>
+                        <Link
+                          href={`/properties/${property._id}/edit`}
+                          className="text-black px-4 py-2 font-semibold mr-4"
+                        >
+                          Edit
                         </Link>
                         <button
                           onClick={() => handleDeleteProperty(property._id)}

@@ -309,7 +309,7 @@ export default function PropertyAddForm() {
                 Amenities
               </legend>
               <div className="max-w-md">
-                <div className="flex flex-wrap  gap-2">
+                <div className="flex flex-wrap gap-2">
                   <div className="mt-6 ">
                     <div className=" flex items-center space-x-4 ">
                       <div className="flex flex-col">
