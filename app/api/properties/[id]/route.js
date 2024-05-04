@@ -73,7 +73,8 @@ export const DELETE = async (request, { params }) => {
  * updates a property
  * @returns  nothing
  */
-export const PUT = async (request) => {
+
+export const PUT = async (request, { params }) => {
   try {
     await connectDataBase();
 
@@ -88,15 +89,25 @@ export const PUT = async (request) => {
       });
     }
 
-    const { userId } = sessionUser;
+    const { id } = params;
 
-    console.log('User ID:', userId);
+    const { userId } = sessionUser;
 
     const formData = await request.formData();
 
-    const images = formData
-      .getAll('images')
-      .filter((image) => image.name !== '');
+    const existingProperty = await Property.findById(id);
+
+    if (!existingProperty) {
+      return new Response('Property does not exit', {
+        status: 404,
+      });
+    }
+
+    if (existingProperty.owner.toString()) {
+      return new Response('Unauthorized', {
+        status: 401,
+      });
+    }
 
     const propertyData = {
       type: formData.get('type'),
@@ -124,36 +135,16 @@ export const PUT = async (request) => {
       },
       owner: userId,
     };
-    console.log('Property Data:', propertyData);
 
-    const imageUploadPromises = [];
-    for (const image of images) {
-      const imageBuffer = await image.arrayBuffer();
-      const imageArray = Array.from(new Uint8Array(imageBuffer));
-      const imageData = Buffer.from(imageArray);
+    /**
+     * ? this will update the property in db
+     */
 
-      const imageBase64 = imageData.toString('base64');
+    const updatedProperty = await Property.findByIdAndUpdate(id, propertyData);
 
-      const result = await cloudinary.uploader.upload(
-        `data:image/png;base64,${imageBase64}`,
-        {
-          folder: 'listingloom',
-        }
-      );
-
-      imageUploadPromises.push(result.secure_url);
-
-      const uploadedImages = await Promise.all(imageUploadPromises);
-
-      propertyData.images = uploadedImages;
-    }
-
-    const newProperty = new Property(propertyData);
-    await newProperty.save();
-
-    return Response.redirect(
-      `${process.env.NEXTAUTH_URL}/properties/${newProperty._id}`
-    );
+    return new Response(JSON.stringify(updatedProperty), {
+      status: 200,
+    });
   } catch (error) {
     console.error('Error:', error);
     return new Response('Failed to add property', {

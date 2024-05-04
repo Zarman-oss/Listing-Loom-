@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation.js';
 import { fetchProperty } from '@/utils/requests.js';
+import Alert from '@/components/UI/Alert.jsx';
 
 export default function PropertyEditForm() {
   const { id } = useParams();
@@ -102,7 +103,27 @@ export default function PropertyEditForm() {
     }));
   };
 
-  const handleSubmit = async () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData(e.target);
+      const res = fetch(`/api/properties/${id}`, {
+        method: 'PUT',
+        body: formData,
+      });
+
+      if (res.status === 200) {
+        router.push(`/properties/${id}`);
+      } else if (res.status === 401 || res.state === 403) {
+        ('Permission denied');
+      } else {
+        ('Something went wrong');
+      }
+    } catch (error) {
+      console.log(error);
+      ('Something went wrong');
+    }
+  };
 
   return (
     !loading && (

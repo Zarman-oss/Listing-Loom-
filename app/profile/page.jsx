@@ -90,7 +90,6 @@ export default function ProfilePage() {
         // }, 5000);
       }
     } catch (error) {
-      console.log(error);
       setAlert({
         show: true,
         type: 'error',
@@ -108,10 +107,10 @@ export default function ProfilePage() {
   return (
     <section className="py-12">
       <Alert
-        show={alert.show} // Pass show state from alert
-        type={alert.type} // Pass type state from alert
-        message={alert.message} // Pass message state from alert
-        onClose={() => setAlert({ show: false, type: '', message: '' })} // Close handler
+        show={alert.show}
+        type={alert.type}
+        message={alert.message}
+        onClose={() => setAlert({ show: false, type: '', message: '' })} 
       />
       <div className="container mx-auto">
         <div className="rounded-lg p-8">
