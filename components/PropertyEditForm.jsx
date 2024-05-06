@@ -1,10 +1,11 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation.js';
-import { fetchProperty } from '@/utils/requests.js';
 import Alert from '@/components/UI/Alert.jsx';
+import { fetchProperty } from '@/utils/requests.js';
+import { useParams, useRouter } from 'next/navigation.js';
+import { useEffect, useState } from 'react';
 
 export default function PropertyEditForm() {
+  const [alertVisible, setAlertVisible] = useState(false);
   const { id } = useParams();
   const router = useRouter();
 
@@ -107,27 +108,33 @@ export default function PropertyEditForm() {
     e.preventDefault();
     try {
       const formData = new FormData(e.target);
-      const res = fetch(`/api/properties/${id}`, {
+      const res = await fetch(`/api/properties/${id}`, {
         method: 'PUT',
         body: formData,
       });
 
       if (res.status === 200) {
         router.push(`/properties/${id}`);
-      } else if (res.status === 401 || res.state === 403) {
-        ('Permission denied');
+      } else if (res.status === 401 || res.status === 403) {
+        setAlertVisible(true); // Update to setAlertVisible instead of setAlert
       } else {
-        ('Something went wrong');
+        setAlertVisible(true); // Update to setAlertVisible instead of setAlert
       }
     } catch (error) {
       console.log(error);
-      ('Something went wrong');
+      setAlertVisible(true); // Update to setAlertVisible instead of setAlert
     }
   };
 
   return (
     !loading && (
       <form onSubmit={handleSubmit}>
+        <Alert
+          show={alertVisible}
+          onClose={() => setAlertVisible(false)}
+          type="error"
+          message="Something went wrong"
+        />
         <div className="space-y-12 m-8 ">
           <div className="border-b border-gray-900/10 pb-12">
             <h2 className="text-base font-semibold leading-7 text-gray-900">
@@ -763,6 +770,7 @@ export default function PropertyEditForm() {
               Cancel
             </button>
             <button
+              ons
               type="submit"
               className="rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-900 "
             >

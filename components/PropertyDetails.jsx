@@ -1,11 +1,5 @@
-import {
-  FaBath,
-  FaBed,
-  FaDotCircle,
-  FaMapMarker,
-  FaRulerCombined,
-  FaTimesCircle,
-} from 'react-icons/fa';
+import { MapPinIcon } from '@heroicons/react/24/solid';
+import { FaBath, FaBed, FaDotCircle, FaRulerCombined } from 'react-icons/fa';
 import BlackButton from '../components/UI/buttons/BlackButton';
 
 export default function PropertyDetails({ property }) {
@@ -48,39 +42,53 @@ export default function PropertyDetails({ property }) {
         </div>
       </div>
 
-      <div className="px-8 ">
-        <div className=" lg:flex-row justify-between mb-4">
-          <h3 className="text-xl font-bold">{property.name}</h3>
-          <div className="text-red-600 font-bold mb-2">
-            <p>{property.type}</p>
-          </div>
-          <h1 className="text-2xl font-semibold mb-1">{property.address} </h1>
+      <div className="px-8">
+        <div className="lg:flex-row justify-between mb-4">
+          <div className="flex flex-col">
+            <h2 className="text-xl font-bold">{property.name}</h2>
+            <div className="text-red-600 text-lg font-bold mb-2">
+              <p>{property.type}</p>
+            </div>
+            <div className="flex items-center mb-2">
+              <h1 className="text-2xl font-semibold mb-1">
+                {property.address}
+              </h1>
+            </div>
+            <div className="flex items-center mt-2 gap-2 text-gray-500 mb-2">
+              <div className="flex items-center gap-3">
+                <p className="flex items-center">
+                  <FaBed className="mr-1 h-6 w-6" />
+                  <span>{property.beds}</span>
+                </p>
+                <p className="flex items-center">
+                  <FaBath className="mr-1 h-6 w-6" />
+                  <span>{property.baths}</span>
+                </p>
+                <p className="flex items-center">
+                  <FaRulerCombined className="mr-1 h-6 w-6" />
+                  <span>{property.square_feet}</span>
+                  <span className="hidden md:inline"> sqft</span>
+                </p>
+              </div>
+            </div>
 
-          <div className="flex align-start gap-2 mb-1 lg:mb-0">
-            <span className="text-red-700">
-              <h2 className="flex">
-                <FaMapMarker className="text-red-700 mr-1 inline mt-1" />
-                {property.location.street}, {property.location.city}
-              </h2>
-            </span>
-          </div>
+            <div className="flex gap-2 mb-2 lg:mb-0">
+              <span className="text-red-700">
+                <h2 className="flex">
+                  <p className="flex items-center mt-1">
+                    <MapPinIcon className="text-red-700 mr-1 h-6 w-6" />
+                    <span className="text-md font-bold">
+                      {property.location.street}, {property.location.city}{' '}
+                      {property.location.state}
+                    </span>
+                  </p>
+                </h2>
+              </span>
+            </div>
 
-          <div className="flex items-center gap-2 text-gray-500 mb-2">
-            <p>
-              <FaBed className="inline mr-2" /> {property.beds}
-            </p>
-            <p>
-              <FaBath className="inline mr-2" /> {property.baths}
-            </p>
-            <p>
-              <FaRulerCombined className="inline mr-2" />
-              {property.square_feet}
-              <span className="md:hidden lg:inline">sqft</span>
-            </p>
-          </div>
-
-          <div className="text-xl text-gray-800 font-semibold mb-4">
-            {getPropertyRate()}
+            <div className="text-xl text-gray-800 font-semibold mb-4">
+              {getPropertyRate()}
+            </div>
           </div>
         </div>
 

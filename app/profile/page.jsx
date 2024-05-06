@@ -4,11 +4,11 @@ import Loader from '@/components/Loading.jsx';
 import Alert from '@/components/UI/Alert.jsx';
 import Modal from '@/components/UI/Modal.jsx';
 import HeroBtn from '@/components/UI/buttons/HeroBtn.jsx';
+import { MapPinIcon } from '@heroicons/react/24/solid';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image.js';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { FaMapMarker } from 'react-icons/fa';
 
 export default function ProfilePage() {
   const [properties, setProperties] = useState([]);
@@ -110,7 +110,7 @@ export default function ProfilePage() {
         show={alert.show}
         type={alert.type}
         message={alert.message}
-        onClose={() => setAlert({ show: false, type: '', message: '' })} 
+        onClose={() => setAlert({ show: false, type: '', message: '' })}
       />
       <div className="container mx-auto">
         <div className="rounded-lg p-8">
@@ -160,10 +160,12 @@ export default function ProfilePage() {
                       <div>
                         <p className="text-lg font-semibold">{property.name}</p>
 
-                        <p className="flex mt-2">
-                          <FaMapMarker className="text-red-700 mr-1 inline mt-1" />
-                          {property.location.street}, {property.location.city}{' '}
-                          {property.location.state}
+                        <p className="flex items-center mt-2">
+                          <MapPinIcon className="text-red-700 mr-1 h-8 w-8" />
+                          <span className="text-lg font-bold">
+                            {property.location.street}, {property.location.city}{' '}
+                            {property.location.state}
+                          </span>
                         </p>
                       </div>
                       <div className="mt-4">

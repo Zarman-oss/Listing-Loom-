@@ -70,8 +70,8 @@ export const DELETE = async (request, { params }) => {
 
 /**
  * PUT /api/properties/:id
- * updates a property
- * @returns  nothing
+ * Updates  a  property
+ * @returns  updated property
  */
 
 export const PUT = async (request, { params }) => {
@@ -80,13 +80,9 @@ export const PUT = async (request, { params }) => {
 
     const sessionUser = await getSessionUser();
 
-    console.log('Session User:', sessionUser);
-
     if (!sessionUser || !sessionUser.userId) {
       console.error('User ID is required');
-      return new Response('User ID is required', {
-        status: 401,
-      });
+      return new Response('User ID is required', { status: 401 });
     }
 
     const { id } = params;
@@ -98,15 +94,11 @@ export const PUT = async (request, { params }) => {
     const existingProperty = await Property.findById(id);
 
     if (!existingProperty) {
-      return new Response('Property does not exit', {
-        status: 404,
-      });
+      return new Response('Property does not exist', { status: 404 });
     }
 
-    if (existingProperty.owner.toString()) {
-      return new Response('Unauthorized', {
-        status: 401,
-      });
+    if (existingProperty.owner.toString() !== userId) {
+      return new Response('Unauthorized', { status: 401 });
     }
 
     const propertyData = {
@@ -136,19 +128,11 @@ export const PUT = async (request, { params }) => {
       owner: userId,
     };
 
-    /**
-     * ? this will update the property in db
-     */
-
     const updatedProperty = await Property.findByIdAndUpdate(id, propertyData);
 
-    return new Response(JSON.stringify(updatedProperty), {
-      status: 200,
-    });
+    return new Response(JSON.stringify(updatedProperty), { status: 200 });
   } catch (error) {
     console.error('Error:', error);
-    return new Response('Failed to add property', {
-      status: 500,
-    });
+    return new Response('Failed to update property', { status: 500 });
   }
 };

@@ -1,14 +1,18 @@
+'use client';
+import { MapPinIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  FaBath,
-  FaBed,
-  FaMapMarker,
-  FaMoneyBill,
-  FaRulerCombined,
-} from 'react-icons/fa';
+import { useState } from 'react';
+import { FaBath, FaBed, FaRulerCombined } from 'react-icons/fa';
+import BookMarkButton from './UI/buttons/BookMarkButton.jsx';
 
 export default function PropertyCard({ property }) {
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = (isSaved) => {
+    setSaved(isSaved);
+  };
+
   const getPropertyRate = () => {
     if (!property || !property.rates) {
       return 'No rate available';
@@ -46,6 +50,7 @@ export default function PropertyCard({ property }) {
       <div className="p-6">
         <div className="text-red-600 font-bold mb-2">{property.type}</div>
         <h3 className="text-2xl font-bold mb-2">{property.name}</h3>
+        <BookMarkButton saved={saved} onSave={handleSave} />{' '}
         <p className="text-gray-600 mb-4">
           <FaBed className="inline mr-2" />
           {property.beds} Bed
@@ -59,9 +64,12 @@ export default function PropertyCard({ property }) {
         </p>
         <div className="flex justify-between items-center">
           <div className="flex items-center">
-            <FaMapMarker className="text-red-700 mr-1" />
-            <p className="text-red-700">
-              {property.location.city}, {property.location.state}
+            <p className="flex items-center mt-2">
+              <MapPinIcon className="text-red-700 mr-1 h-8 w-8" />
+              <span className="text-md font-bold">
+                {property.location.street}, {property.location.city}{' '}
+                {property.location.state}
+              </span>
             </p>
           </div>
           <Link href={`/properties/${property._id}`} passHref>
