@@ -770,7 +770,6 @@ export default function PropertyEditForm() {
               Cancel
             </button>
             <button
-              ons
               type="submit"
               className="rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-900 "
             >

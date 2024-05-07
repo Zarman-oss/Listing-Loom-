@@ -43,13 +43,13 @@ export default function PropertyDetails({ property }) {
       </div>
 
       <div className="px-8">
-        <div className="lg:flex-row justify-between mb-4">
+        <div className="lg:flex-row justify-between mb-2">
           <div className="flex flex-col">
             <h2 className="text-xl font-bold">{property.name}</h2>
-            <div className="text-red-600 text-lg font-bold mb-2">
+            <div className="text-red-600 text-lg font-bold ">
               <p>{property.type}</p>
             </div>
-            <div className="flex items-center mb-2">
+            <div className="flex items-center mb-1">
               <h1 className="text-2xl font-semibold mb-1">
                 {property.address}
               </h1>
@@ -72,9 +72,9 @@ export default function PropertyDetails({ property }) {
               </div>
             </div>
 
-            <div className="flex gap-2 mb-2 lg:mb-0">
+            <div className="flex mb-2 lg:mb-0">
               <span className="text-red-700">
-                <h2 className="flex">
+                <h2>
                   <p className="flex items-center mt-1">
                     <MapPinIcon className="text-red-700 mr-1 h-6 w-6" />
                     <span className="text-md font-bold">
