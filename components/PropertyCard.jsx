@@ -47,35 +47,38 @@ export default function PropertyCard({ property }) {
           objectFit="cover"
         />
       </div>
-      <div className="p-6">
-        <div className="text-red-600 font-bold mb-2">{property.type}</div>
-        <h3 className="text-2xl font-bold mb-2">{property.name}</h3>
-        <BookMarkButton saved={saved} onSave={handleSave} />{' '}
-        <p className="text-gray-600 mb-4">
-          <FaBed className="inline mr-2" />
-          {property.beds} Bed
-          <FaBath className="inline ml-4 mr-2" />
-          {property.baths} Baths
-          <FaRulerCombined className="inline ml-4 mr-2" />
-          {property.square_feet.toLocaleString()} sqft
-        </p>
-        <p className="text-lg font-bold text-green-600 mb-4">
-          {getPropertyRate()}
-        </p>
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <p className="flex items-center mt-2">
-              <MapPinIcon className="text-red-700 mr-1 h-8 w-8" />
-              <span className="text-md font-bold">
-                {property.location.street}, {property.location.city}{' '}
-                {property.location.state}
-              </span>
-            </p>
+
+      <div className="p-6 flex justify-between items-start lg:items-center">
+        <div>
+          <div className="text-red-600 font-bold mb-2">{property.type}</div>
+          <h3 className="text-2xl font-bold mb-2">{property.name}</h3>
+          <p className="text-gray-600 mb-4">
+            <FaBed className="inline mr-2" />
+            {property.beds} Bed
+            <FaBath className="inline ml-4 mr-2" />
+            {property.baths} Baths
+            <FaRulerCombined className="inline ml-4 mr-2" />
+            {property.square_feet.toLocaleString()} sqft
+          </p>
+          <p className="text-lg font-bold text-green-600 mb-4">
+            {getPropertyRate()}
+          </p>
+          <div className="flex items-center mt-2">
+            <MapPinIcon className="text-red-700 mr-1 h-8 w-8" />
+            <span className="text-md font-bold">
+              {property.location.street}, {property.location.city}{' '}
+              {property.location.state}
+            </span>
           </div>
-          <Link href={`/properties/${property._id}`} passHref>
-            <LinkButton>Check Property &#8594;</LinkButton>
-          </Link>
         </div>
+        <div className="ml-auto">
+          <BookMarkButton saved={saved} onSave={handleSave} />
+        </div>
+      </div>
+      <div className="  p-2 m-4">
+        <Link href={`/properties/${property._id}`} passHref>
+          <LinkButton>Check Property &#8594;</LinkButton>
+        </Link>
       </div>
     </div>
   );

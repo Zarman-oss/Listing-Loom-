@@ -6,8 +6,9 @@ export default function BookMarkButton({ saved, onSave }) {
 
   const handleClick = () => {
     setIsSaved(!isSaved);
-    onSave(!isSaved); // Callback to parent component to handle saving state
+    onSave(!isSaved);
   };
+
   return (
     <div className="">
       <button
