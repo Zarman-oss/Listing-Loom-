@@ -39,7 +39,7 @@ export default function PropertyCard({ property }) {
 
   return (
     <div className="rounded-lg overflow-hidden shadow-lg">
-      <div className="relative h-60">
+      <div className="relative h-80">
         <Image
           src={property.images[0]}
           alt="Property Image"
@@ -75,7 +75,7 @@ export default function PropertyCard({ property }) {
           <BookMarkButton saved={saved} onSave={handleSave} />
         </div>
       </div>
-      <div className="  p-2 m-4">
+      <div className="p-2 m-2">
         <Link href={`/properties/${property._id}`} passHref>
           <LinkButton>Check Property &#8594;</LinkButton>
         </Link>

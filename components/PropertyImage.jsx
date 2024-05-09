@@ -8,8 +8,8 @@ export default function PropertyImage({ image }) {
           src={image}
           alt="img"
           sizes="(min-width: 768px) 45vw, 100vw"
-          height={0}
-          width={0}
+          height={100}
+          width={100}
           className="rounded-lg h-auto w-full lg:w-full lg:h-full "
         />
       </div>

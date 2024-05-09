@@ -1,6 +1,7 @@
 import { MapPinIcon } from '@heroicons/react/24/solid';
 import { FaBath, FaBed, FaDotCircle, FaRulerCombined } from 'react-icons/fa';
 import BlackButton from '../components/UI/buttons/BlackButton';
+import BookMarkButton from './UI/buttons/BookMarkButton.jsx';
 
 export default function PropertyDetails({ property }) {
   const getPropertyRate = () => {
@@ -18,9 +19,15 @@ export default function PropertyDetails({ property }) {
       return 'No rate available';
     }
   };
+
   if (!property) {
     return null;
   }
+
+  const handleSave = (isSaved) => {
+    // Your save logic here
+    console.log('Saved:', isSaved);
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 py-8 gap-12">
@@ -42,13 +49,14 @@ export default function PropertyDetails({ property }) {
         </div>
       </div>
 
-      <div className="px-8">
+      <div className="px-8 flex flex-col justify-between">
         <div className="lg:flex-row justify-between mb-2">
+          <div className="text-red-600 text-lg font-bold ">
+            <p>{property.type}</p>
+          </div>
           <div className="flex flex-col">
             <h2 className="text-xl font-bold">{property.name}</h2>
-            <div className="text-red-600 text-lg font-bold ">
-              <p>{property.type}</p>
-            </div>
+
             <div className="flex items-center mb-1">
               <h1 className="text-2xl font-semibold mb-1">
                 {property.address}
@@ -90,9 +98,13 @@ export default function PropertyDetails({ property }) {
               {getPropertyRate()}
             </div>
           </div>
+          <div className="flex items-center">
+            <BlackButton text="Contact Agent" />
+            <div className="ml-4">
+              <BookMarkButton saved={false} onSave={handleSave} />
+            </div>
+          </div>
         </div>
-
-        <BlackButton text="Contact Agent" />
       </div>
     </div>
   );
