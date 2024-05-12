@@ -7,7 +7,7 @@ export default function BookMarkButton({ saved, onSave }) {
   const [showAlert, setShowAlert] = useState(false);
 
   const handleClick = () => {
-    // Toggle bookmark state 
+    // Toggle bookmark state
     setIsBookmarked(!isBookmarked);
     onSave(!isBookmarked);
 

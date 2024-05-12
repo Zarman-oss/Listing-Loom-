@@ -18,13 +18,14 @@ export const POST = async (request) => {
 
     const sessionUser = await getSessionUser();
 
-    if (!session || !session.userId) {
+    if (!sessionUser || !sessionUser.userId) {
       return new Response('User ID is required', {
         status: 401,
       });
     }
 
     const { userId } = sessionUser;
+
     const user = await User.findOne({ _id: userId });
 
     let isBookmarked = user.bookmarks.includes(propertyId);
@@ -53,7 +54,8 @@ export const POST = async (request) => {
       }
     );
   } catch (error) {
-    console.log(error);
+    console.log('Error:', error);
+
     return new Response('Something went wrong', {
       status: 500,
     });

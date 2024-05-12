@@ -7,12 +7,6 @@ import { FaBath, FaBed, FaRulerCombined } from 'react-icons/fa';
 import BookMarkButton from './UI/buttons/BookMarkButton.jsx';
 
 export default function PropertyCard({ property }) {
-  const [saved, setSaved] = useState(false);
-
-  const handleSave = (isSaved) => {
-    setSaved(isSaved);
-  };
-
   const getPropertyRate = () => {
     if (!property || !property.rates) {
       return 'No rate available';
@@ -72,7 +66,7 @@ export default function PropertyCard({ property }) {
           </div>
         </div>
         <div className="ml-auto">
-          <BookMarkButton saved={saved} onSave={handleSave} />
+          <BookMarkButton />
         </div>
       </div>
       <div className="p-2 m-2">
