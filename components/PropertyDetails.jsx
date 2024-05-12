@@ -101,7 +101,11 @@ export default function PropertyDetails({ property }) {
           <div className="flex items-center">
             <BlackButton text="Contact Agent" />
             <div className="ml-4">
-              <BookMarkButton saved={false} onSave={handleSave} />
+              <BookMarkButton
+                saved={false}
+                property={property}
+                onSave={handleSave}
+              />
             </div>
           </div>
         </div>
