@@ -24,10 +24,10 @@ export default function PropertyDetails({ property }) {
     return null;
   }
 
-  const handleSave = (isSaved) => {
-    // Your save logic here
-    console.log('Saved:', isSaved);
-  };
+  // const handleSave = (isSaved) => {
+  //   // Your save logic here
+  //   console.log('Saved:', isSaved);
+  // };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 py-8 gap-12">
@@ -101,11 +101,11 @@ export default function PropertyDetails({ property }) {
           <div className="flex items-center">
             <BlackButton text="Contact Agent" />
             <div className="ml-4">
-              <BookMarkButton
+              {/* <BookMarkButton
                 saved={false}
                 property={property}
                 onSave={handleSave}
-              />
+              /> */}
             </div>
           </div>
         </div>
