@@ -66,7 +66,7 @@ export default function PropertyCard({ property }) {
           </div>
         </div>
         <div className="ml-auto">
-          <BookMarkButton />
+          <BookMarkButton property={property} />
         </div>
       </div>
       <div className="p-2 m-2">
