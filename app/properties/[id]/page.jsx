@@ -38,8 +38,8 @@ export default function PropertyPage() {
     return <ErrorPage />;
   }
   return (
-    <div className="max-w-4xl mx-auto p-8 ">
-      <div className=" flex justify-start gap-x-6 mb-4">
+    <div className="max-w-4xl mx-auto p-8">
+      <div className="flex justify-start gap-x-6 mb-4">
         <Link href="/">
           <GoBackBtn text="Go Back" />
         </Link>
@@ -47,10 +47,12 @@ export default function PropertyPage() {
       {!loading && property && (
         <>
           <PropertyImage image={property.images[0]} />
+          <div className="flex gap-x-4 mt-4">
+            <BookMarkButton property={property} />
+          </div>
         </>
       )}
-      <PropertyDetails property={property} />
-      <BookMarkButton property={property} />
+      {property && <PropertyDetails property={property} />}
     </div>
   );
 }

@@ -1,7 +1,7 @@
-export default function () {
+export default function page() {
   return (
     <div>
-      <h1>csdd</h1>
+      <h1>few</h1>
     </div>
   );
 }
