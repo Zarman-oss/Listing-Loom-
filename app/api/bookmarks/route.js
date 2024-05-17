@@ -1,8 +1,37 @@
 import connectDataBase from '@/config/database.js';
+import Property from '@/models/Property.js';
 import User from '@/models/User.js';
 import { getSessionUser } from '@/utils/getSessionUser.js';
 
 export const dynamic = 'force-dynamic';
+
+/**
+ * GET /api/bookmarks
+ * Get bookmark properties
+ */
+
+export const GET = async () => {
+  try {
+    await connectDataBase();
+
+    const sessionUser = await getSessionUser();
+
+    if (!sessionUser || !sessionUser.userId) {
+      return new Response('User ID is required', { status: 401 });
+    }
+
+    const { userId } = sessionUser;
+
+    const user = await User.findOne({ _id: userId });
+
+    const bookmarks = await Property.find({ _id: { $in: user.bookmarks } });
+
+    return new Response(JSON.stringify(bookmarks), { status: 200 });
+  } catch (error) {
+    console.log(error);
+    return new Response('Something went wrong', { status: 500 });
+  }
+};
 
 /**
  * POST /api/bookmarks

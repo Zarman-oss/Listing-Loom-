@@ -6,6 +6,9 @@ import {
   HomeModernIcon,
   UserIcon,
   XMarkIcon,
+  HomeIcon,
+  BookmarkIcon,
+  ArrowLeftStartOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -170,6 +173,7 @@ export default function Navbar() {
                                   'block px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
+                                <HomeIcon className="inline w-5 h-5 mr-3 text-gray-700" />
                                 See Properties
                               </a>
                             )}
@@ -183,7 +187,22 @@ export default function Navbar() {
                                   'block px-4 py-2 text-sm text-gray-700'
                                 )}
                               >
+                                <UserIcon className="w-5 h-5 mr-3 text-gray-700 inline" />
                                 User Profile
+                              </Link>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <Link
+                                href="/properties/saved"
+                                className={classNames(
+                                  active ? 'bg-gray-100' : '',
+                                  'block px-4 py-2 text-sm text-gray-700'
+                                )}
+                              >
+                                <BookmarkIcon className="w-5 h-5 mr-3 text-gray-700 inline" />
+                                Saved Listings
                               </Link>
                             )}
                           </Menu.Item>
@@ -199,6 +218,7 @@ export default function Navbar() {
                                 )}
                               >
                                 Logout
+                                <ArrowLeftStartOnRectangleIcon className="w-5 h-5 mr-3 text-gray-700 inline" />{' '}
                               </button>
                             )}
                           </Menu.Item>

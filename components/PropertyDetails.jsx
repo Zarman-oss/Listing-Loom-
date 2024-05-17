@@ -94,19 +94,13 @@ export default function PropertyDetails({ property }) {
               </span>
             </div>
 
-            <div className="text-xl text-gray-800 font-semibold mb-4">
+            <div className="text-lg ml-1  text-green-600 font-semibold mb-4">
               {getPropertyRate()}
             </div>
           </div>
           <div className="flex items-center">
             <BlackButton text="Contact Agent" />
-            <div className="ml-4">
-              {/* <BookMarkButton
-                saved={false}
-                property={property}
-                onSave={handleSave}
-              /> */}
-            </div>
+            <div className="ml-4"></div>
           </div>
         </div>
       </div>
