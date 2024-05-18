@@ -1,32 +1,16 @@
-import HeroBtn from './UI/buttons/HeroBtn.jsx';
-
+import PropertySearchForm from './PropertySearchForm.jsx';
 export default function Hero() {
   return (
-    <div className="bg-white text-black py-20 w-full flex flex-col sm:flex-row justify-center items-center">
-      <div className="container flex flex-col m-8 items-center">
-        <h1 className="text-4xl lg:text-6xl font-bold text-red-700 text-center">
+    <div className=" text-black py-20 w-full flex flex-col items-center justify-center">
+      <div className="container flex flex-col items-center text-center px-4">
+        <h1 className="text-4xl lg:text-6xl font-bold text-red-700 mb-6">
           Search Through Countless Properties And Rentals To Match Your Needs
         </h1>
-
-        <p className="mt-4 text-base lg:text-xl text-gray-700 text-center">
+        <p className="text-base lg:text-xl text-gray-700 mb-8">
           Search, post rentals, and sell properties with ease
         </p>
       </div>
-
-      <div className=" flex flex-col sm:flex-row items-center m-4 sm:m-24">
-        <input
-          type="text"
-          placeholder="Search City Zip Code"
-          className="border border-gray-300 px-4 py-2 mr-2 mb-2 sm:mb-0"
-        />
-        <select className="border border-gray-300 px-4 py-2 mr-2 mb-2 sm:mb-0">
-          <option value="house">House</option>
-          <option value="apartment">Apartment</option>
-          <option value="condo">Condo</option>
-          <option value="townhouse">Townhouse</option>
-        </select>
-        <HeroBtn text="Search" />
-      </div>
+      <PropertySearchForm />
     </div>
   );
 }

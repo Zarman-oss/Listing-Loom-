@@ -573,6 +573,7 @@ export default function PropertyAddForm() {
                   </div>
                 </div>
               </div>
+
               <legend className="text-sm font-semibold leading-6 text-gray-900">
                 Put amount
               </legend>
