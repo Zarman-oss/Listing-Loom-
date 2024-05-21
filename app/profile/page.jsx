@@ -26,7 +26,6 @@ export default function ProfilePage() {
 
   useEffect(() => {
     const fetchUserProperties = async (userId) => {
-      console.log('Fetching properties for user:', userId);
       if (!userId) {
         return;
       }
@@ -34,7 +33,6 @@ export default function ProfilePage() {
       try {
         const res = await fetch(`/api/properties/user/${userId}`);
 
-        console.log('Response:', res);
         if (res.status === 200) {
           const data = await res.json();
           setProperties(data);
@@ -72,22 +70,12 @@ export default function ProfilePage() {
           type: 'success',
           message: 'Property deleted successfully',
         });
-
-        // Hide the alert after 5 seconds
-        // setTimeout(() => {
-        //   setAlert({ show: false, type: '', message: '' });
-        // }, 5000);
       } else {
         setAlert({
           show: true,
           type: 'error',
           message: 'Failed to delete property',
         });
-
-        // Hide the alert after 5 seconds
-        // setTimeout(() => {
-        //   setAlert({ show: false, type: '', message: '' });
-        // }, 5000);
       }
     } catch (error) {
       setAlert({
@@ -95,11 +83,6 @@ export default function ProfilePage() {
         type: 'error',
         message: 'Failed to delete property',
       });
-
-      // Hide the alert after 5 seconds
-      // setTimeout(() => {
-      //   setAlert({ show: false, type: '', message: '' });
-      // }, 5000);
     }
 
     setIsModalOpen(false);

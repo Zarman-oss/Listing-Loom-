@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import PropertyCard from '@/components/PropertyCard.jsx';
 import Loader from '@/app/loading.jsx';
@@ -25,7 +24,6 @@ export default function SavedPropertiesPage() {
           const data = await res.json();
           setProperties(data);
         } else {
-          console.log(res.statusText);
           setAlertData({
             show: true,
             type: 'error',
@@ -60,7 +58,7 @@ export default function SavedPropertiesPage() {
         <div className="max-w-7xl mx-auto p-1">
           <div>
             <Link href="/">
-              <GoBackBtn text="Go Back" />
+              <GoBackBtn />
             </Link>
           </div>
         </div>

@@ -1,3 +1,4 @@
+'use client';
 import { HeartIcon, TrashIcon } from '@heroicons/react/24/solid';
 import { useSession } from 'next-auth/react';
 import { useState, useEffect } from 'react';

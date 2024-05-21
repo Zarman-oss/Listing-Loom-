@@ -1,6 +1,6 @@
-import { Fragment, useState } from 'react';
 import { Transition } from '@headlessui/react';
 import { CheckCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Fragment } from 'react';
 
 export default function Alert({ show, onClose, type, message }) {
   return (

@@ -1,18 +1,19 @@
 'use client';
-import { TailSpin } from 'react-loader-spinner';
+import { RotatingLines } from 'react-loader-spinner';
 
 export default function Loader({ loading }) {
   return (
     <div className="flex items-center justify-center h-dvh">
-      <TailSpin
+      <RotatingLines
         visible={true}
-        height={100}
-        width={100}
-        color="#000000"
-        ariaLabel="tail-spin-loading"
-        radius={1}
+        height="500"
+        width="50"
+        strokeColor="black"
+        strokeWidth="5"
+        animationDuration="0.75"
+        ariaLabel="rotating-lines-loading"
         wrapperStyle={{}}
-        wrapperClass="loader"
+        wrapperClass=""
       />
     </div>
   );

@@ -122,6 +122,7 @@ export default function PropertyAddForm() {
                   <option value="Cabin Or Cottage">Cabin or Cottage</option>
                   <option value="Room">Room</option>
                   <option value="Studio">Studio</option>
+                  <option value="Townhouse">Townhouse</option>
                   <option value="Other">Other</option>
                 </select>
               </div>

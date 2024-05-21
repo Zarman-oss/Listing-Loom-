@@ -27,9 +27,6 @@ export default function PropertySearchForm() {
       className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4"
     >
       <div className="flex flex-col">
-        {/* <label htmlFor="location" className="mb-2 font-medium text-gray-700">
-          Location
-        </label> */}
         <input
           type="text"
           id="location"
@@ -40,12 +37,6 @@ export default function PropertySearchForm() {
         />
       </div>
       <div className="flex flex-col">
-        {/* <label
-          htmlFor="property-type"
-          className="mb-2 font-medium text-gray-700"
-        >
-          Property Type
-        </label> */}
         <select
           id="property-type"
           value={propertyType}
@@ -53,10 +44,12 @@ export default function PropertySearchForm() {
           className="w-full sm:w-auto border border-gray-300 rounded-lg px-4 py-2 shadow-md"
         >
           <option value="All">All</option>
-          <option value="House">House</option>
           <option value="Apartment">Apartment</option>
           <option value="Condo">Condo</option>
+          <option value="House">House</option>
+          <option value="Room">Room</option>
           <option value="Townhouse">Townhouse</option>
+          <option value="Studio">Studio</option>
         </select>
       </div>
       <button type="submit" className="w-full sm:w-auto">

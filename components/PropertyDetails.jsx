@@ -24,11 +24,6 @@ export default function PropertyDetails({ property }) {
     return null;
   }
 
-  // const handleSave = (isSaved) => {
-  //   // Your save logic here
-  //   console.log('Saved:', isSaved);
-  // };
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 py-8 gap-12">
       <div>

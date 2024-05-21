@@ -14,7 +14,7 @@ export default async function HomePage() {
       <div className="flex max-w-7xl mx-auto p-1">
         <div>
           <Link href="/">
-            <GoBackBtn text="Go Back" />
+            <GoBackBtn />
           </Link>
         </div>
       </div>

@@ -47,8 +47,6 @@ export const POST = async (request) => {
 
     const { userId } = sessionUser;
 
-    console.log('User ID:', userId);
-
     const formData = await request.formData();
 
     const images = formData

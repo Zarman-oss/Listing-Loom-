@@ -18,9 +18,9 @@ export const GET = async (request) => {
       $or: [
         { name: locationPattern },
         { description: locationPattern },
-        { 'location.street': locationPattern },
         { 'location.city': locationPattern },
         { 'location.street': locationPattern },
+        { 'location.state': locationPattern },
       ],
     };
 

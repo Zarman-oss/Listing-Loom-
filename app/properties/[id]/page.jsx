@@ -41,7 +41,7 @@ export default function PropertyPage() {
     <div className="max-w-4xl mx-auto p-8">
       <div className="flex justify-start gap-x-6 mb-4">
         <Link href="/">
-          <GoBackBtn text="Go Back" />
+          <GoBackBtn />
         </Link>
       </div>
       {!loading && property && (
