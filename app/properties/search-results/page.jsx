@@ -1,6 +1,7 @@
 'use client';
 import Loader from '@/components/Loading.jsx';
 import PropertyCard from '@/components/PropertyCard.jsx';
+import PropertySearchForm from '@/components/PropertySearchForm.jsx';
 import ErrorPage from '@/components/UI/ErrorPage.jsx';
 import GoBackBtn from '@/components/UI/buttons/GoBackBtn.jsx';
 import Link from 'next/link.js';
@@ -10,8 +11,8 @@ import { useEffect, useState } from 'react';
 export default function SearchResultsPage() {
   const searchParams = useSearchParams();
 
-  const [properties, setProperties] = useState();
   const [loading, setLoading] = useState(true);
+  const [properties, setProperties] = useState();
 
   const location = searchParams.get('location');
   const propertyType = searchParams.get('propertyType');
@@ -39,34 +40,44 @@ export default function SearchResultsPage() {
     fetchSearchResults();
   }, [location, propertyType]);
 
-  return loading ? (
-    <Loader loading={loading} />
-  ) : (
-    <section className="px-4 py-4">
-      <div className="flex max-w-7xl mx-auto p-1">
-        <div>
-          <Link href="/">
-            <GoBackBtn />
-          </Link>
+  return (
+    <>
+      <section className="py-4">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col items-center sm:px-6 lg:px-8 ">
+          <PropertySearchForm />
         </div>
-      </div>
-      <div className="text-center mt-6 mb-8">
-        <h1 className="text-3xl font-bold text-gray-800">Search Results</h1>
-        <p className="text-gray-600 mt-2">
-          Properties matching your search criteria
-        </p>
-      </div>
-      {properties && properties.length === 0 ? (
-        <ErrorPage />
+      </section>
+
+      {loading ? (
+        <Loader loading={loading} />
       ) : (
-        <div className="container-xl lg:container m-auto px-4 py-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {properties.map((property) => (
-              <PropertyCard key={property._id} property={property} />
-            ))}
+        <section className="px-4 py-4">
+          <div className="flex max-w-7xl mx-auto p-1">
+            <div>
+              <Link href="/">
+                <GoBackBtn />
+              </Link>
+            </div>
           </div>
-        </div>
+          <div className="text-center mt-6 mb-8">
+            <h1 className="text-3xl font-bold text-gray-800">Search Results</h1>
+            <p className="text-gray-600 mt-2">
+              Properties matching your search criteria
+            </p>
+          </div>
+          {properties && properties.length === 0 ? (
+            <ErrorPage />
+          ) : (
+            <div className="container-xl lg:container m-auto px-4 py-6">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                {properties.map((property) => (
+                  <PropertyCard key={property._id} property={property} />
+                ))}
+              </div>
+            </div>
+          )}
+        </section>
       )}
-    </section>
+    </>
   );
 }

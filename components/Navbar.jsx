@@ -1,22 +1,22 @@
 'use client';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import {
+  ArrowLeftOnRectangleIcon,
   Bars3Icon,
   BellIcon,
+  BookmarkIcon,
+  HomeIcon,
   HomeModernIcon,
   UserIcon,
   XMarkIcon,
-  HomeIcon,
-  BookmarkIcon,
-  ArrowLeftOnRectangleIcon,
 } from '@heroicons/react/24/outline';
+import { getProviders, signIn, signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Fragment, useState, useEffect } from 'react';
-import Image from 'next/image';
+import { Fragment, useEffect, useState } from 'react';
 import LoginButton from './UI/buttons/LoginBtn';
 import PrimaryButton from './UI/buttons/PrimaryBtn';
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
