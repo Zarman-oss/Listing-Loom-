@@ -56,11 +56,9 @@ export default function SavedPropertiesPage() {
       />
       <section className="px-4 py-4">
         <div className="max-w-7xl mx-auto p-1">
-          <div>
-            <Link href="/">
-              <GoBackBtn />
-            </Link>
-          </div>
+          <Link href="/">
+            <GoBackBtn className="text-lg font-medium text-gray-700" />{' '}
+          </Link>
         </div>
         <div className="text-center mt-6 mb-8">
           <h1 className="text-3xl font-bold text-gray-800">Saved Listings</h1>

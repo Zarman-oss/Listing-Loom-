@@ -10,7 +10,7 @@ export default function PropertyImage({ image }) {
           sizes="(min-width: 768px) 45vw, 100vw"
           height={100}
           width={100}
-          className="rounded-lg h-auto w-full lg:w-full lg:h-full "
+          className="rounded-lg h-auto w-full lg:w-full lg:h-full hover:scale-105 transition-transform duration-300 ease-in-out"
         />
       </div>
     </div>

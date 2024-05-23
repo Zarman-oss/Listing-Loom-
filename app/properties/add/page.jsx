@@ -7,10 +7,13 @@ export default function AddProperty() {
     <section className="px-4 py-4">
       <div className="max-w-7xl mx-auto p-1">
         <div className="flex flex-col items-center">
-          <div className="w-full max-w-lg">
-            <Link href="/">
-              <GoBackBtn />
-            </Link>
+          <div className="w-full max-w-lg ">
+            <div className="max-w-7xl mx-auto p-1 ">
+              <Link href="/">
+                <GoBackBtn className="ml-auto text-lg font-medium text-gray-700" />{' '}
+              </Link>
+            </div>
+
             <div className="mt-4">
               <PropertyAddForm />
             </div>
