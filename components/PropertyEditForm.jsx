@@ -479,7 +479,6 @@ export default function PropertyEditForm() {
               </div>
             </div>
           </form>
-          ; ;
         </>
       )}
     </>

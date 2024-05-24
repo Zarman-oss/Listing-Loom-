@@ -71,7 +71,7 @@ export default function Navbar() {
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-4 ">
                     <Link href="/properties">
                       <PrimaryButton
                         text="Properties"
@@ -101,7 +101,7 @@ export default function Navbar() {
                           onClick={() => signIn(provider.id)}
                           type="button"
                         >
-                          <LoginButton text="Login" />
+                          <LoginButton />
                         </button>
                       ))}
                   </div>
