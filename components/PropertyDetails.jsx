@@ -1,10 +1,17 @@
 'use client';
-import { MapPinIcon } from '@heroicons/react/24/solid';
+import AgentContactModal from '@/components/AgentContactModal.jsx';
+import {
+  ArrowLeftEndOnRectangleIcon,
+  InboxIcon,
+  MapPinIcon,
+} from '@heroicons/react/24/solid';
+import { signIn, useSession } from 'next-auth/react';
 import { useState } from 'react';
 import { FaBath, FaBed, FaDotCircle, FaRulerCombined } from 'react-icons/fa';
-import AgentContactModal from './AgentContactModal.jsx'; 
 
 export default function PropertyDetails({ property }) {
+  const { data: session } = useSession();
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const getPropertyRate = () => {
     const { rates } = property;
@@ -34,20 +41,16 @@ export default function PropertyDetails({ property }) {
     setIsModalOpen(false);
   };
 
-  const handleButtonClick = () => {
-    setIsModalOpen(true);
-  };
-
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 py-8 gap-12">
       <div>
-        <div className=" mt-10 sm:mt-2">
+        <div className="mt-10 sm:mt-2">
           <h2 className="text-xl font-semibold mb-4">Description</h2>
           <p className="text-gray-700">{property.description}</p>
         </div>
-        <div className=" mt-10 sm:mt-2">
+        <div className="mt-10 sm:mt-2">
           <h2 className="text-xl font-semibold mb-4">Property Details</h2>
-          <ul className="grid grid-cols-1 md:grid-col-2 lg:grid-cols-3 list-none">
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 list-none">
             {property.amenities.map((amenity, index) => (
               <li key={index} className="flex items-center">
                 <FaDotCircle className="text-green-500 mr-1" />
@@ -60,12 +63,11 @@ export default function PropertyDetails({ property }) {
 
       <div className="px-8 flex flex-col justify-between">
         <div className="lg:flex-row justify-between mb-2">
-          <div className="text-red-600 text-lg font-bold ">
+          <div className="text-red-600 text-lg font-bold">
             <p>{property.type}</p>
           </div>
           <div className="flex flex-col">
             <h2 className="text-xl font-bold">{property.name}</h2>
-
             <div className="flex items-center mb-1">
               <h1 className="text-2xl font-semibold mb-1">
                 {property.address}
@@ -103,18 +105,29 @@ export default function PropertyDetails({ property }) {
               </span>
             </div>
 
-            <div className="text-lg ml-1  text-green-600 font-semibold mb-4">
+            <div className="text-lg ml-1 text-green-600 font-semibold mb-4">
               {getPropertyRate()}
             </div>
           </div>
           <div className="flex items-center">
-            <button
-              onClick={handleOpenModal}
-              className="inline-block bg-black text-white rounded px-4 py-2 hover:bg-gray-800 transition-colors duration-300"
-            >
-              Contact Agent
-            </button>
-            {isModalOpen && (
+            {!session ? (
+              <button
+                onClick={() => signIn()}
+                className="inline-flex items-center bg-black text-white rounded px-4 py-2 hover:bg-gray-800 transition-colors duration-300"
+              >
+                <ArrowLeftEndOnRectangleIcon className="h-5 w-5 mr-2" />
+                Log in to inquire
+              </button>
+            ) : (
+              <button
+                onClick={handleOpenModal}
+                className="inline-flex items-center bg-black text-white rounded px-4 py-2 hover:bg-gray-800 transition-colors duration-300"
+              >
+                <InboxIcon className="h-5 w-5 mr-2" />
+                Contact Agent
+              </button>
+            )}
+            {isModalOpen && session && (
               <AgentContactModal
                 property={property}
                 isOpen={isModalOpen}

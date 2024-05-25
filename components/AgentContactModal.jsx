@@ -1,37 +1,70 @@
 'use client';
-
 import { Dialog, Transition } from '@headlessui/react';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import {
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+} from '@heroicons/react/24/solid';
 import { Fragment, useRef, useState } from 'react';
+import { useSession } from 'next-auth/react';
 
 export default function AgentContactModal({ isOpen, onClose, property }) {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-    recipient: property.owner,
-    property: property._id,
-  });
+  const { data: session } = useSession();
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [message, setMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   const cancelButtonRef = useRef(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement your logic for form submission here
-    console.log(formData);
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      onClose();
-    }, 2000); // Show the success message for 2 seconds
+    setError(false);
+
+    const formData = {
+      name,
+      email,
+      phone,
+      message,
+      recipient: property.owner,
+      property: property._id,
+    };
+
+    try {
+      const res = await fetch('/api/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.status === 200) {
+        setIsSubmitted(true);
+        setTimeout(() => {
+          setIsSubmitted(false);
+          onClose();
+        }, 2000);
+      } else {
+        const errorData = await res.json();
+        console.log('Error:', errorData.message);
+        setError(true);
+        setTimeout(() => {
+          setError(false);
+          onClose();
+        }, 2000);
+      }
+    } catch (error) {
+      console.log('Error:', error);
+      setError(true);
+    } finally {
+      setName('');
+      setEmail('');
+      setPhone('');
+      setMessage('');
+    }
   };
 
   return (
@@ -69,7 +102,14 @@ export default function AgentContactModal({ isOpen, onClose, property }) {
                 <div className="p-6 flex flex-col items-center justify-center space-y-4">
                   <CheckCircleIcon className="h-12 w-12 text-green-500" />
                   <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    Your email has been sent successfully!
+                    Your message has been sent successfully!
+                  </h3>
+                </div>
+              ) : error ? (
+                <div className="p-6 flex flex-col items-center justify-center space-y-4">
+                  <ExclamationCircleIcon className="h-12 w-12 text-red-500" />
+                  <h3 className="text-lg leading-6 font-medium text-gray-900">
+                    Something went wrong. Please try again.
                   </h3>
                 </div>
               ) : (
@@ -89,8 +129,8 @@ export default function AgentContactModal({ isOpen, onClose, property }) {
                           id="name"
                           name="name"
                           type="text"
-                          value={formData.name}
-                          onChange={handleChange}
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
                           className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           required
                         />
@@ -103,8 +143,8 @@ export default function AgentContactModal({ isOpen, onClose, property }) {
                           id="email"
                           type="email"
                           name="email"
-                          value={formData.email}
-                          onChange={handleChange}
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
                           className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           required
                         />
@@ -117,8 +157,8 @@ export default function AgentContactModal({ isOpen, onClose, property }) {
                           id="phone"
                           type="tel"
                           name="phone"
-                          value={formData.phone}
-                          onChange={handleChange}
+                          value={phone}
+                          onChange={(e) => setPhone(e.target.value)}
                           className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           required
                         />
@@ -130,8 +170,8 @@ export default function AgentContactModal({ isOpen, onClose, property }) {
                         <textarea
                           id="message"
                           name="message"
-                          value={formData.message}
-                          onChange={handleChange}
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
                           rows="4"
                           className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                           required
@@ -142,7 +182,7 @@ export default function AgentContactModal({ isOpen, onClose, property }) {
                   <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-end space-x-2">
                     <button
                       type="button"
-                      className="inline-flex justify-center py-2 px-4 border shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                      className="inline-flex justify-center py-2 px-4 text-sm font-medium text-black"
                       onClick={onClose}
                       ref={cancelButtonRef}
                     >
