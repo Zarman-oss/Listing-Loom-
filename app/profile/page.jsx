@@ -109,9 +109,9 @@ export default function ProfilePage() {
               />
               <div>
                 <h2 className="text-xl mb-1 font-semibold">Name:</h2>
-                <p className="text-lg">{profileName}</p>
+                <p className="text-lg md:text-xl">{profileName}</p>
                 <h2 className="text-xl mb-1 font-semibold mt-4">Email:</h2>
-                <p className="text-lg">{profileEmail}</p>
+                <p className="text-lg md:text-xl">{profileEmail}</p>
               </div>
             </div>
 
@@ -124,15 +124,15 @@ export default function ProfilePage() {
               {loading ? (
                 <Loader />
               ) : (
-                properties.map((property) => (
-                  <div
-                    key={property._id}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-6"
-                  >
-                    <div className="p-4 flex flex-col justify-between">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {properties.map((property) => (
+                    <div
+                      key={property._id}
+                      className=" bg-white rounded-lg shadow-md transition-transform transform hover:scale-105"
+                    >
                       <Link href={`/properties/${property._id}`}>
                         <Image
-                          className="h-48 w-full object-cover mb-4 cursor-pointer"
+                          className=" h-48 w-full object-cover mb-4 cursor-pointer"
                           src={property.images[0]}
                           alt=""
                           width={300}
@@ -154,19 +154,20 @@ export default function ProfilePage() {
                       <div className="mt-4">
                         <Link
                           href={`/properties/${property._id}/edit`}
-                          className="text-black px-4 py-2 font-semibold mr-4"
+                          className="text-black px-4 py-2 font-semibold mr-4 md:px-6 md:py-3"
                         >
                           Edit
                         </Link>
                         <button
+                          className="md:px-6 md:py-3"
                           onClick={() => handleDeleteProperty(property._id)}
                         >
                           <HeroBtn text="Delete" />
                         </button>
                       </div>
                     </div>
-                  </div>
-                ))
+                  ))}
+                </div>
               )}
             </div>
           </div>

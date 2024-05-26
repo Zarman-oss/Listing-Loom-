@@ -107,16 +107,18 @@ export default function Navbar() {
                   </div>
                 ) : (
                   <div className="flex items-center space-x-4">
-                    <button
-                      type="button"
-                      className="rounded-full p-1 text-gray-400 hover:text-white"
-                    >
-                      <span className="sr-only">View notifications</span>
-                      <BellIcon
-                        className="h-8 w-8 text-black"
-                        aria-hidden="true"
-                      />
-                    </button>
+                    <Link href="/messages">
+                      <button
+                        type="button"
+                        className="rounded-full p-1 text-gray-400 hover:text-white"
+                      >
+                        <span className="sr-only">View notifications</span>
+                        <BellIcon
+                          className="h-8 w-8 text-black"
+                          aria-hidden="true"
+                        />
+                      </button>
+                    </Link>
 
                     {/* UserIcon dropdown */}
                     <Menu as="div" className="relative">

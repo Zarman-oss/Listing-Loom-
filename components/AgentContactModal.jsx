@@ -5,11 +5,8 @@ import {
   ExclamationCircleIcon,
 } from '@heroicons/react/24/solid';
 import { Fragment, useRef, useState } from 'react';
-import { useSession } from 'next-auth/react';
 
 export default function AgentContactModal({ isOpen, onClose, property }) {
-  const { data: session } = useSession();
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');

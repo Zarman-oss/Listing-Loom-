@@ -474,7 +474,7 @@ export default function PropertyEditForm() {
                   type="submit"
                   className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-red-700 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-red-900"
                 >
-                  Update Confirm
+                  Confirm
                 </button>
               </div>
             </div>
