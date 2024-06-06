@@ -56,6 +56,12 @@ export default function Messages() {
               <div className="flex items-center mb-2">
                 <UserIcon className="text-blue-500 mr-2 h-5 w-5" />
                 <h2 className="text-md text-gray-800 font-semibold">
+                  {message.property.name}
+                </h2>
+              </div>
+              <div className="flex items-center mb-2">
+                <UserIcon className="text-blue-500 mr-2 h-5 w-5" />
+                <h2 className="text-md text-gray-800 font-semibold">
                   {message.name}
                 </h2>
               </div>
