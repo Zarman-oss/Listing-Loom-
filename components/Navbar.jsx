@@ -6,12 +6,10 @@ import {
   BellIcon,
   BookmarkIcon,
   HomeIcon,
-  HomeModernIcon,
   UserIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import { getProviders, signIn, signOut, useSession } from 'next-auth/react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { Fragment, useEffect, useState } from 'react';
@@ -24,10 +22,8 @@ function classNames(...classes) {
 
 export default function Navbar() {
   const { data: session } = useSession();
-
   const pathname = usePathname();
   const profileImage = session?.user?.image;
-
   const [providers, setProviders] = useState(null);
 
   useEffect(() => {
@@ -35,7 +31,6 @@ export default function Navbar() {
       const res = await getProviders();
       setProviders(res);
     };
-
     setAuthProviders();
   }, []);
 
@@ -64,14 +59,13 @@ export default function Navbar() {
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center ml-2">
                   <Link href="/">
-                    <HomeModernIcon
-                      className="h-8 w-8 text-black"
-                      aria-hidden="true"
-                    />
+                    <span className="text-xl font-bold text-gray-900">
+                      Listing Loom
+                    </span>
                   </Link>
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
-                  <div className="flex space-x-4 ">
+                  <div className="flex space-x-4">
                     <Link href="/properties">
                       <PrimaryButton
                         text="Properties"
@@ -125,12 +119,10 @@ export default function Navbar() {
                       <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="sr-only">Open user menu</span>
                         {profileImage ? (
-                          <Image
+                          <img
                             className="h-8 w-8 rounded-full"
                             alt=""
                             src={profileImage}
-                            width={32}
-                            height={32}
                           />
                         ) : (
                           <UserIcon className="h-6 w-6 rounded-full text-white" />

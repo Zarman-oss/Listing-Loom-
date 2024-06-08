@@ -1,5 +1,4 @@
 'use client';
-
 import {
   EnvelopeIcon,
   InboxIcon,
@@ -54,7 +53,9 @@ export default function Messages() {
               className="p-3 bg-white rounded-lg shadow-md transition-transform transform hover:scale-105"
             >
               <div className="flex items-center mb-2">
-                <UserIcon className="text-blue-500 mr-2 h-5 w-5" />
+                <h2 className="text-md text-gray-800 font-semibold">
+                  Property Listing:
+                </h2>
                 <h2 className="text-md text-gray-800 font-semibold">
                   {message.property.name}
                 </h2>
@@ -62,7 +63,7 @@ export default function Messages() {
               <div className="flex items-center mb-2">
                 <UserIcon className="text-blue-500 mr-2 h-5 w-5" />
                 <h2 className="text-md text-gray-800 font-semibold">
-                  {message.name}
+                  {message.sender.username}
                 </h2>
               </div>
               <div className="flex items-center mb-1">

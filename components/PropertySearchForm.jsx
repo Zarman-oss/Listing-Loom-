@@ -52,7 +52,7 @@ export default function PropertySearchForm() {
           <option value="Studio">Studio</option>
         </select>
       </div>
-      <div className="w-full sm:w-auto">
+      <div className="w-full flex justify-center  sm:w-auto">
         <HeroBtn text="Search" />
       </div>
     </form>

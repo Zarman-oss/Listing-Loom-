@@ -2,7 +2,6 @@ import { MapPinIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
 import BookMarkButton from './UI/buttons/BookMarkButton.jsx';
-import AgentContactModal from './AgentContactModal.jsx';
 
 export default function PropertyCard({ property }) {
   const getPropertyRate = () => {
@@ -30,21 +29,23 @@ export default function PropertyCard({ property }) {
   }
 
   return (
-    <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out">
+    <div className="rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out bg-white">
       <div className="relative h-80">
         <Image
           src={property.images[0]}
-          alt="Property Image"
+          alt={`Image of ${property.name}`}
           layout="fill"
           objectFit="cover"
           className="hover:scale-105 transition-transform duration-300 ease-in-out"
         />
       </div>
 
-      <div className="p-6 flex flex-col lg:flex-row justify-between items-start lg:items-center">
+      <div className="p-6 flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-4 lg:space-y-0">
         <div className="flex-grow">
-          <div className="text-red-600 font-semibold mb-2">{property.type}</div>
-          <h3 className="text-2xl font-bold mb-2 text-gray-900">
+          <div className="text-red-600 font-semibold mb-2 uppercase">
+            {property.type}
+          </div>
+          <h3 className="text-2xl font-bold mb-2 text-gray-900 hover:text-indigo-600 transition-colors duration-300">
             {property.name}
           </h3>
           <p className="text-gray-600 mb-4">
@@ -71,7 +72,7 @@ export default function PropertyCard({ property }) {
           <BookMarkButton property={property} />
         </div>
       </div>
-      <div className="p-2 m-2 text-center">
+      <div className="p-4 text-center">
         <Link href={`/properties/${property._id}`} passHref>
           <LinkButton>Check Property &#8594;</LinkButton>
         </Link>
@@ -82,7 +83,7 @@ export default function PropertyCard({ property }) {
 
 // Styled component for the Link button
 const LinkButton = ({ children }) => (
-  <button className="text-indigo-600 font-semibold hover:text-indigo-800 focus:outline-none">
+  <button className="text-indigo-600 font-semibold hover:text-indigo-800 focus:outline-none transition-colors duration-300">
     {children}
   </button>
 );
