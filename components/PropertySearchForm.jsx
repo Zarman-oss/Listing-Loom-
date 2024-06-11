@@ -24,36 +24,36 @@ export default function PropertySearchForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4"
+      className='flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4'
     >
-      <div className="flex flex-col">
+      <div className='flex flex-col'>
         <input
-          type="text"
-          id="location"
-          placeholder="State, City, Area Code"
+          type='text'
+          id='location'
+          placeholder='State, City, Area Code'
           value={location}
           onChange={(e) => setLocation(e.target.value)}
-          className="w-full sm:w-auto border border-gray-300 rounded-lg px-4 py-2 shadow-md"
+          className='w-full sm:w-auto border border-gray-300 rounded-lg px-4 py-2 shadow-md'
         />
       </div>
-      <div className="flex flex-col">
+      <div className='flex flex-col'>
         <select
-          id="property-type"
+          id='property-type'
           value={propertyType}
           onChange={(e) => setPropertyType(e.target.value)}
-          className="w-full sm:w-auto border border-gray-300 rounded-lg px-4 py-2 shadow-md"
+          className='w-full sm:w-auto border border-gray-300 rounded-lg px-4 py-2 shadow-md'
         >
-          <option value="All">All</option>
-          <option value="Apartment">Apartment</option>
-          <option value="Condo">Condo</option>
-          <option value="House">House</option>
-          <option value="Room">Room</option>
-          <option value="Townhouse">Townhouse</option>
-          <option value="Studio">Studio</option>
+          <option value='All'>All</option>
+          <option value='Apartment'>Apartment</option>
+          <option value='Condo'>Condo</option>
+          <option value='House'>House</option>
+          <option value='Room'>Room</option>
+          <option value='Townhouse'>Townhouse</option>
+          <option value='Studio'>Studio</option>
         </select>
       </div>
-      <div className="w-full flex justify-center  sm:w-auto">
-        <HeroBtn text="Search" />
+      <div className='w-full flex justify-center  sm:w-auto'>
+        <HeroBtn text='Search' />
       </div>
     </form>
   );

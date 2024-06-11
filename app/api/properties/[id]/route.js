@@ -33,7 +33,7 @@ export const GET = async (request, { params }) => {
 
 export const DELETE = async (request, { params }) => {
   try {
-    const propertyId = params.id; // Assuming the property id is provided in the params
+    const propertyId = params.id;
 
     const sessionUser = await getSessionUser();
 

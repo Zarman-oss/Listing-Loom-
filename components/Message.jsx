@@ -6,6 +6,7 @@ import Alert from './UI/Alert.jsx';
 export default function Message({ messages }) {
   const [isRead, setIsRead] = useState(messages.read);
   const [alert, setAlert] = useState({ show: false, type: '', message: '' });
+  const [isDeleted, setIsDeleted] = useState(false);
 
   const handleMarkAsRead = async () => {
     try {
@@ -39,6 +40,7 @@ export default function Message({ messages }) {
       });
 
       if (res.status === 200) {
+        setIsDeleted(true);
         setAlert({
           show: true,
           type: 'success',
@@ -54,6 +56,10 @@ export default function Message({ messages }) {
       });
     }
   };
+
+  if (isDeleted) {
+    return null;
+  }
 
   return (
     <>
@@ -102,11 +108,7 @@ export default function Message({ messages }) {
           <button onClick={handleMarkAsRead} className='px-2 py-1 text-sm'>
             {isRead ? 'Mark As New' : 'Mark As Read'}
           </button>
-          <HeroBtn
-            onClick={handleDelete}
-            text='Delete'
-            className='bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 transition-colors text-sm'
-          />
+          <HeroBtn onClick={handleDelete} text='Delete' />
         </div>
       </div>
     </>
