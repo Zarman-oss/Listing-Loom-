@@ -2,11 +2,14 @@
 import { useState } from 'react';
 import HeroBtn from '@/components/UI/buttons/HeroBtn.jsx';
 import Alert from './UI/Alert.jsx';
+import { useGlobalContext } from '@/context/globalContext.js';
 
 export default function Message({ messages }) {
   const [isRead, setIsRead] = useState(messages.read);
   const [alert, setAlert] = useState({ show: false, type: '', message: '' });
   const [isDeleted, setIsDeleted] = useState(false);
+
+  const { setUnread } = useGlobalContext();
 
   const handleMarkAsRead = async () => {
     try {
@@ -17,6 +20,7 @@ export default function Message({ messages }) {
       if (res.status === 200) {
         const { read } = await res.json();
         setIsRead(read);
+        setUnread((prevCount) => (read ? prevCount - 1 : prevCount + 1));
         setAlert({
           show: true,
           type: 'success',
@@ -41,6 +45,7 @@ export default function Message({ messages }) {
 
       if (res.status === 200) {
         setIsDeleted(true);
+        setUnread((prevCount) => prevCount - 1);
         setAlert({
           show: true,
           type: 'success',
