@@ -2,7 +2,8 @@ import ErrorPage from './UI/ErrorPage';
 import PropertyCard from '../components/PropertyCard';
 import { fetchProperties } from '../utils/requests';
 
-export default async function FeaturedProperties() {
+export default async function FeaturedProperties() { 
+  
   const data = await fetchProperties();
 
   const recentListing = data.properties
