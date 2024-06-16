@@ -1,3 +1,4 @@
+import cloudinary from '@/config/cloudinary.js';
 import connectDataBase from '@/config/database.js';
 import Property from '@/models/Property.js';
 import { getSessionUser } from '@/utils/getSessionUser.js';
@@ -57,9 +58,20 @@ export const DELETE = async (request, { params }) => {
       });
     }
 
+    const publicIds = property.images.map((imageUrl) => {
+      const parts = imageUrl.split('/');
+      return parts.at(-1).split('.').at(0);
+    });
+
+    if (publicIds.length > 0) {
+      for (let publicId of publicIds) {
+        await cloudinary.uploader.destroy('listingloom/' + publicId);
+      }
+    }
+
     await property.deleteOne();
 
-    return new Response('Property deleted', {
+    return new Response('Property Deleted', {
       status: 200,
     });
   } catch (error) {
@@ -131,7 +143,7 @@ export const PUT = async (request, { params }) => {
 
     const updatedProperty = await Property.findByIdAndUpdate(id, propertyData);
 
-    return new Response(JSON.stringify(updatedProperty), { status: 200 });
+    return Response.json(updatedProperty);
   } catch (error) {
     console.error('Error:', error);
     return new Response('Failed to update property', { status: 500 });
