@@ -1,14 +1,13 @@
 const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 
+export const dynamic = 'force-dynamic';
+
 /**
  **Fetch all properties
  */
 
-export async function fetchProperties() { 
-
-
+export async function fetchProperties() {
   try {
-    
     if (!apiDomain) {
       return [];
     }
