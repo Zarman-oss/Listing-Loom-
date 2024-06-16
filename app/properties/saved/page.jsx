@@ -54,23 +54,23 @@ export default function SavedPropertiesPage() {
         type={alertData.type}
         message={alertData.message}
       />
-      <section className="px-4 py-4">
-        <div className="max-w-7xl mx-auto p-1">
-          <Link href="/">
-            <GoBackBtn className="text-lg font-medium text-gray-700" />{' '}
+      <section className='px-4 py-4'>
+        <div className='max-w-7xl mx-auto p-1'>
+          <Link href='/'>
+            <GoBackBtn className='text-lg font-medium text-gray-700' />{' '}
           </Link>
         </div>
-        <div className="text-center mt-6 mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Saved Listings</h1>
-          <p className="text-gray-600 mt-2">
-            Here are the properties you've saved
+        <div className='text-center mt-6 mb-8'>
+          <h1 className='text-3xl font-bold text-gray-800'>Saved Listings</h1>
+          <p className='text-gray-600 mt-2'>
+            Here are the properties you have saved
           </p>
         </div>
         {properties && properties.length === 0 ? (
           <ErrorPage />
         ) : (
-          <div className="container-xl lg:container m-auto px-4 py-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className='container-xl lg:container m-auto px-4 py-6'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
               {properties.map((property) => (
                 <PropertyCard key={property._id} property={property} />
               ))}
