@@ -23,7 +23,7 @@ export default function UnreadMessageCount({ session }) {
       }
     };
     fetchUnreadMessages();
-  }, [session]);
+  }, [session, setUnread]);
 
   return (
     <Link href='/messages'>
