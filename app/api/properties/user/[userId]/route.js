@@ -20,7 +20,8 @@ export const GET = async (request, { params }) => {
     }
     const properties = await Property.find({ owner: userId });
 
-    return Response.json(properties);
+    return Response.json(properties); 
+    
   } catch (error) {
     console.log(error);
     return new Response('Something went wrong', {
