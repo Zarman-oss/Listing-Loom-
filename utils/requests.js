@@ -1,7 +1,5 @@
 const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 
-export const dynamic = 'force-dynamic';
-
 /**
  **Fetch all properties
  */
