@@ -2,14 +2,12 @@ import { MapPinIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
 import BookMarkButton from './UI/buttons/BookMarkButton.jsx';
-import getPropertyRate from '@/utils/getPropertyRate.js'; 
+import getPropertyRate from '@/utils/getPropertyRate.js';
 
 export default function PropertyCard({ property }) {
   if (!property) {
     return null;
   }
-
-  console.log('Property received in PropertyCard:', property);
 
   return (
     <div className='rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out bg-white'>

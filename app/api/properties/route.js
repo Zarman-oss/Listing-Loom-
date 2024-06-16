@@ -3,8 +3,6 @@ import Property from '@/models/Property';
 import { getSessionUser } from '@/utils/getSessionUser';
 import cloudinary from '@/config/cloudinary.js';
 
-export const dynamic = 'force-dynamic';
-
 /**
  * GET api/properties
  * Fetch  all the properties
@@ -30,9 +28,7 @@ export const GET = async (request) => {
       properties,
     };
 
-    return new Response(JSON.stringify(result), {
-      status: 200,
-    });
+    return Response.json(result);
   } catch (error) {
     console.log(error);
     return new Response('Service is not available', { status: 500 });
@@ -51,10 +47,7 @@ export const POST = async (request) => {
 
     const sessionUser = await getSessionUser();
 
-    console.log('Session User:', sessionUser);
-
     if (!sessionUser || !sessionUser.userId) {
-      console.error('User ID is required');
       return new Response('User ID is required', {
         status: 401,
       });
@@ -95,11 +88,11 @@ export const POST = async (request) => {
       },
       owner: userId,
     };
-    console.log('Property Data:', propertyData);
 
-    const imageUploadPromises = [];
-    for (const image of images) {
-      const imageBuffer = await image.arrayBuffer();
+    const imageUrls = [];
+
+    for (const imageFile of images) {
+      const imageBuffer = await imageFile.arrayBuffer();
       const imageArray = Array.from(new Uint8Array(imageBuffer));
       const imageData = Buffer.from(imageArray);
 
@@ -112,12 +105,10 @@ export const POST = async (request) => {
         }
       );
 
-      imageUploadPromises.push(result.secure_url);
-
-      const uploadedImages = await Promise.all(imageUploadPromises);
-
-      propertyData.images = uploadedImages;
+      imageUrls.push(result.secure_url);
     }
+
+    propertyData.images = imageUrls;
 
     const newProperty = new Property(propertyData);
     await newProperty.save();
