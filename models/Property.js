@@ -60,6 +60,9 @@ const PropertySchema = new Schema(
       monthly: {
         type: Number,
       },
+      price: {
+        type: Number,
+      },
     },
     seller_info: {
       name: {

@@ -33,7 +33,11 @@ export default function Properties() {
       }
     };
     fetchProperties();
-  }, []);
+  }, [page, pageSize]);
+
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+  };
 
   return loading ? (
     <Loader />
@@ -50,7 +54,12 @@ export default function Properties() {
           </div>
         </div>
       )}
-      <Pagination />
+      <Pagination
+        page={page}
+        pageSize={pageSize}
+        totalItems={totalItems}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 }

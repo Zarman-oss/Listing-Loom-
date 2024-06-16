@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/rules-of-hooks */
 'use client';
 import { fetchProperty } from '@/utils/requests.js';
 import Link from 'next/link';
@@ -14,7 +13,6 @@ export default function PropertyPage() {
   const { id } = useParams();
 
   const [property, setProperty] = useState(null);
-
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -38,16 +36,16 @@ export default function PropertyPage() {
     return <ErrorPage />;
   }
   return (
-    <div className="max-w-4xl mx-auto p-8">
-      <div className="flex justify-start gap-x-6 mb-4">
-        <Link href="/">
+    <div className='max-w-4xl mx-auto p-8'>
+      <div className='flex justify-start gap-x-6 mb-4'>
+        <Link href='/'>
           <GoBackBtn />
         </Link>
       </div>
       {!loading && property && (
         <>
-          <PropertyImage image={property.images[0]} />
-          <div className="flex gap-x-4 mt-4">
+          <PropertyImage images={property.images} />
+          <div className='flex gap-x-4 mt-4'>
             <BookMarkButton property={property} />
           </div>
         </>

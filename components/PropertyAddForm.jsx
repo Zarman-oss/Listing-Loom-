@@ -23,6 +23,7 @@ export default function PropertyAddForm() {
       weekly: '',
       monthly: '',
       nightly: '',
+      price: '',
     },
     seller_info: {
       name: '',
@@ -331,7 +332,7 @@ export default function PropertyAddForm() {
               </div>
             </fieldset>
             <div className='mt-6 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3'>
-              {['weekly', 'monthly', 'nightly'].map((rate) => (
+              {['weekly', 'monthly', 'nightly', 'price'].map((rate) => (
                 <div key={rate}>
                   <label
                     htmlFor={`${rate}_rate`}
