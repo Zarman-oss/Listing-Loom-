@@ -30,7 +30,7 @@ export const GET = async (request, { params }) => {
  * @returns  nothing
  */
 
-export const DELETE = async (request, { params }) => {
+export const DELETE = async ({ params }) => {
   try {
     const propertyId = params.id;
 
