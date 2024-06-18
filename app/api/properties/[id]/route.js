@@ -9,7 +9,7 @@ import { getSessionUser } from '@/utils/getSessionUser.js';
  * @returns  An array of properties
  */
 
-export const GET = async (request, { params }) => {
+export const GET = async ({ params }) => {
   try {
     await connectDataBase();
 

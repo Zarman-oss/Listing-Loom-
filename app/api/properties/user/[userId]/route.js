@@ -7,7 +7,7 @@ import Property from '@/models/Property.js';
  * @returns  all the listings that user created
  */
 
-export const GET = async (request, { params }) => {
+export const GET = async ({ params }) => {
   try {
     await connectDataBase();
 
@@ -20,8 +20,7 @@ export const GET = async (request, { params }) => {
     }
     const properties = await Property.find({ owner: userId });
 
-    return Response.json(properties); 
-    
+    return Response.json(properties);
   } catch (error) {
     console.log(error);
     return new Response('Something went wrong', {
