@@ -22,19 +22,13 @@ export const authOptions = {
   },
   callbacks: {
     async signIn({ profile }) {
-      console.log('Sign-in callback invoked');
-
       try {
         await connectDataBase();
 
         const userExists = await User.findOne({ email: profile.email });
 
-        console.log('User exists:', userExists);
-
         if (!userExists) {
           const username = profile.name.slice(0, 20);
-
-          console.log('Creating new user:', profile.email);
 
           await User.create({
             email: profile.email,
@@ -50,8 +44,6 @@ export const authOptions = {
     },
 
     async session({ session }) {
-      console.log('Session callback invoked');
-
       try {
         const user = await User.findOne({
           email: session.user.email,
