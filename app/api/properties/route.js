@@ -3,8 +3,6 @@ import Property from '@/models/Property';
 import { getSessionUser } from '@/utils/getSessionUser';
 import cloudinary from '@/config/cloudinary.js';
 
-export const fetchCache = 'force-no-store';
-
 /**
  * GET api/properties
  * Fetch  all the properties
