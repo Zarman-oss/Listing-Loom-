@@ -9,7 +9,7 @@ import { getSessionUser } from '@/utils/getSessionUser.js';
  * @returns  An array of properties
  */
 
-export const GET = async ({ params }) => {
+export const GET = async (request, { params }) => {
   try {
     await connectDataBase();
 
@@ -17,7 +17,9 @@ export const GET = async ({ params }) => {
 
     if (!property) return new Response('Property Not Found', { status: 404 });
 
-    return Response.json(property);
+    return new Response(JSON.stringify(property), {
+      status: 200,
+    });
   } catch (error) {
     console.log(error);
     return new Response('Something Went Wrong', { status: 500 });
@@ -30,7 +32,7 @@ export const GET = async ({ params }) => {
  * @returns  nothing
  */
 
-export const DELETE = async ({ params }) => {
+export const DELETE = async (request, { params }) => {
   try {
     const propertyId = params.id;
 
