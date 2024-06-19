@@ -1,9 +1,8 @@
-const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
+const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || '';
 
 /**
  **Fetch all properties
  */
-
 export async function fetchProperties() {
   try {
     if (!apiDomain) {
@@ -13,7 +12,7 @@ export async function fetchProperties() {
     const res = await fetch(`${apiDomain}/properties`);
 
     if (!res.ok) {
-      throw new Error('Failed to fetch data ');
+      throw new Error('Failed to fetch data');
     }
 
     return res.json();
@@ -26,7 +25,6 @@ export async function fetchProperties() {
 /**
  **Fetch single property
  */
-
 export async function fetchProperty(id) {
   try {
     if (!apiDomain) {
@@ -36,7 +34,7 @@ export async function fetchProperty(id) {
     const res = await fetch(`${apiDomain}/properties/${id}`);
 
     if (!res.ok) {
-      throw new Error('Failed to fetch data ');
+      throw new Error('Failed to fetch data');
     }
 
     return res.json();
