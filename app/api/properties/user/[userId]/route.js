@@ -7,7 +7,7 @@ import Property from '@/models/Property.js';
  * @returns  all the listings that user created
  */
 
-export const GET = async ({ params }) => {
+export const GET = async (request, { params }) => {
   try {
     await connectDataBase();
 
