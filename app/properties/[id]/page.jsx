@@ -7,7 +7,9 @@ import PropertyDetails from '../../../components/PropertyDetails';
 import PropertyImage from '../../../components/PropertyImage';
 import ErrorPage from '../../../components/UI/ErrorPage';
 import GoBackBtn from '../../../components/UI/buttons/GoBackBtn';
-import BookMarkButton from '@/components/UI/buttons/BookMarkButton.jsx';
+import BookMarkButton from '@/components/UI/buttons/BookMarkButton.jsx'; 
+
+export const dynamic = 'force-dynamic';
 
 export default function PropertyPage() {
   const { id } = useParams();
