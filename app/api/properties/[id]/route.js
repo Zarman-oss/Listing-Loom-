@@ -9,6 +9,8 @@ import { getSessionUser } from '@/utils/getSessionUser.js';
  * @returns  An array of properties
  */
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (request, { params }) => {
   try {
     await connectDataBase();

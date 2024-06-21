@@ -6,6 +6,8 @@ import Property from '@/models/Property.js';
  * @returns search results back
  */
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (request) => {
   try {
     await connectDataBase();

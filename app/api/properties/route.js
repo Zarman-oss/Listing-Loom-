@@ -9,6 +9,8 @@ import cloudinary from '@/config/cloudinary.js';
  * @returns  An array of properties
  */
 
+export const dynamic = 'force-dynamic';
+
 export const GET = async (request) => {
   try {
     await connectDataBase();
