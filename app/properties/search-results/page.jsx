@@ -8,6 +8,8 @@ import Link from 'next/link.js';
 import { useSearchParams } from 'next/navigation.js';
 import { useEffect, useState } from 'react';
 
+export const dynamic = 'force-dynamic';
+
 export default function SearchResultsPage() {
   const searchParams = useSearchParams();
 
@@ -42,8 +44,8 @@ export default function SearchResultsPage() {
 
   return (
     <>
-      <section className="py-4">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col items-center sm:px-6 lg:px-8 ">
+      <section className='py-4'>
+        <div className='max-w-7xl mx-auto px-4 flex flex-col items-center sm:px-6 lg:px-8 '>
           <PropertySearchForm />
         </div>
       </section>
@@ -51,25 +53,25 @@ export default function SearchResultsPage() {
       {loading ? (
         <Loader loading={loading} />
       ) : (
-        <section className="px-4 py-4">
-          <div className="flex max-w-7xl mx-auto p-1">
+        <section className='px-4 py-4'>
+          <div className='flex max-w-7xl mx-auto p-1'>
             <div>
-              <Link href="/">
+              <Link href='/'>
                 <GoBackBtn />
               </Link>
             </div>
           </div>
-          <div className="text-center mt-6 mb-8">
-            <h1 className="text-3xl font-bold text-gray-800">Search Results</h1>
-            <p className="text-gray-600 mt-2">
+          <div className='text-center mt-6 mb-8'>
+            <h1 className='text-3xl font-bold text-gray-800'>Search Results</h1>
+            <p className='text-gray-600 mt-2'>
               Properties matching your search criteria
             </p>
           </div>
           {properties && properties.length === 0 ? (
             <ErrorPage />
           ) : (
-            <div className="container-xl lg:container m-auto px-4 py-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className='container-xl lg:container m-auto px-4 py-6'>
+              <div className='grid grid-cols-1 md:grid-cols-3 gap-5'>
                 {properties.map((property) => (
                   <PropertyCard key={property._id} property={property} />
                 ))}

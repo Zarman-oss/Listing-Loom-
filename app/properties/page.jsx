@@ -3,6 +3,8 @@ import PropertySearchForm from '@/components/PropertySearchForm.jsx';
 import Link from 'next/link';
 import GoBackBtn from '../../components/UI/buttons/GoBackBtn';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   return (
     <>

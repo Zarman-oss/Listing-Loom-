@@ -7,8 +7,11 @@ import HeroBtn from '@/components/UI/buttons/HeroBtn.jsx';
 import { MapPinIcon } from '@heroicons/react/24/solid';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image.js';
-import Link from 'next/link';``
+import Link from 'next/link';
+``;
 import { useEffect, useState } from 'react';
+
+export const dynamic = 'force-dynamic';
 
 export default function ProfilePage() {
   const [properties, setProperties] = useState([]);

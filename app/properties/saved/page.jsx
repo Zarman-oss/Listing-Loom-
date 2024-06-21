@@ -7,6 +7,8 @@ import Link from 'next/link.js';
 import GoBackBtn from '@/components/UI/buttons/GoBackBtn.jsx';
 import ErrorPage from '@/components/UI/ErrorPage.jsx';
 
+export const dynamic = 'force-dynamic';
+
 export default function SavedPropertiesPage() {
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);

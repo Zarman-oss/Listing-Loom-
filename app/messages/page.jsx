@@ -2,6 +2,8 @@ import Messages from '@/components/Messages.jsx';
 import GoBackBtn from '@/components/UI/buttons/GoBackBtn.jsx';
 import Link from 'next/link.js';
 
+export const dynamic = 'force-dynamic';
+
 export default function MessagePage() {
   return (
     <>
