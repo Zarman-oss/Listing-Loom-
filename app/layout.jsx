@@ -4,6 +4,7 @@ import AuthProvider from '../components/AuthProvider';
 import Navbar from '../components/Navbar';
 import { GlobalProvider } from '@/context/globalContext.js';
 
+export const dynamic = 'force-dynamic';
 
 export const metaData = {
   title: 'ListingLoom | Easy Real Estate Listing ',
